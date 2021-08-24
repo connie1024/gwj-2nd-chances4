@@ -23,4 +23,18 @@
       <v-divider></v-divider>
 
       <v-card-text class="white--text">
-        {{ new Date().getFullYear() }} — <st
+        {{ new Date().getFullYear() }} — <strong>SmartTrading</strong>
+      </v-card-text>
+    </v-card>
+  </v-footer>
+</template>
+<script>
+export default {
+  date() {
+    return {
+      icons: ["mdi-facebook", "mdi-twitter", "mdi-linkedin", "mdi-instagram"],
+    };
+  },
+};
+</script>
+<style></style>
