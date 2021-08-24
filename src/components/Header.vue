@@ -47,3 +47,132 @@
           >
             <v-icon left dark>{{ item.icon }}</v-icon>
             {{ item.title }}
+          </v-btn>
+        </template>
+        <v-btn text v-if="loginState === 'true'" @click="toProfile">
+          <v-icon left dark>mdi-account-arrow-right</v-icon>
+          Profile
+        </v-btn>
+        <v-btn text v-if="loginState === 'true'" @click="signOut">
+          <v-icon left dark>lock_open</v-icon>
+          Sign Out
+        </v-btn>
+      </v-toolbar-items>
+    </v-app-bar>
+  </div>
+</template>
+
+<script>
+import firebase from "firebase";
+
+export default {
+  data() {
+    return {
+      sidebar: false,
+      menuItems: [
+        { title: "Home", path: "/home", icon: "home", show: true, method: "" },
+        { title: "Chat", path: "/chat", icon: "chat", show: true, method: "" },
+        {
+          title: "Sign Up",
+          path: "/signup",
+          icon: "face",
+          show: true,
+          method: "",
+        },
+        {
+          title: "Sign In",
+          path: "/login",
+          icon: "mdi-account-arrow-right",
+          show: true,
+          method: "",
+        },
+      ],
+      loginState: false,
+      searchterm: '', 
+    };
+  },
+  methods: {
+    signOut: function() {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          console.log("user sign out");
+          localStorage.clear();
+          localStorage.setItem("login", false);
+          location.reload();
+        });
+    },
+    toProfile: function() {
+      this.$router.push({
+        path: `/profile`,
+        name: "profile",
+        params: { user: localStorage.UID },
+        props: true,
+      });
+    },
+    toSearch: function(x) {
+        console.log("routig"+x); 
+        console.log(this.$route.path);
+        if (this.$route.path==="/search") {
+           this.$router.push({ name: 'blank', params: { searchterm: x }});
+        } else {
+        this.$router.push({ name: 'search', params: { searchterm: x } }) }
+        // this.$router.push({ name: 'search', params: { searchterm: x } }).then(this.$router.push({ name: 'search', params: { searchterm: x } }))
+    }
+  },
+  components: {},
+  created() {
+    this.loginState = localStorage.getItem("login");
+    console.log(localStorage.getItem("login"));
+    if (localStorage.getItem("login") == "true") {
+      this.menuItems[2].show = false;
+      this.menuItems[3].show = false;
+      this.menuItems[1].show = true;
+    } else {
+      this.menuItems[2].show = true;
+      this.menuItems[3].show = true;
+      this.menuItems[1].show = false;
+    }
+  },
+};
+</script>
+
+<style scoped>
+#logo {
+  width: 130px;
+  top: 0px;
+  left: 0px;
+}
+#search {
+  position: absolute;
+  top: 27px;
+  left: 250px;
+  border-radius: 20px;
+  height: 20px;
+  width: 200px;
+}
+
+li {
+  text-decoration: none;
+  list-style: none;
+  float: left;
+  margin-left: 30px;
+  position: relative;
+  top: 10px;
+  left: 1000px;
+}
+
+#nav {
+  position: absolute;
+  top: 0;
+  margin-bottom: 10px;
+}
+
+#icon2 {
+  width: 40px;
+  position: absolute;
+  top: 20px;
+  left: 460px;
+}
+</style>
