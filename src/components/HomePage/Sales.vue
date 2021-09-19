@@ -69,3 +69,227 @@
                   color="deep-purple"
                   height="10"
                   indeterminate
+                ></v-progress-linear>
+              </template>
+
+              <v-img height="250" v-bind:src="x[1].images[0]"></v-img>
+
+              <v-card-title>{{ x[1]["Title"] }}</v-card-title>
+
+              <v-card-text>
+                <div class="my-2 subtitle-1">
+                  <strong>Deal at:</strong> {{ x[1]["Location"] }}
+                </div>
+
+                <div v-if="x[1].Price != ''">
+                  <strong>Price:</strong> ${{ x[1]["Price"] }}
+                </div>
+                <div v-if="x[1]['sale']['Alternatives'] != ''">
+                  <strong>Can trade for:</strong>
+                  {{ x[1]["sale"]["Alternatives"] }}
+                </div>
+                <div class="my-2">
+                  <strong>Posted:</strong>
+                  <timeago
+                    :datetime="x[1]['date'].toDate()"
+                    :auto-update="60"
+                    style="padding-left: 5px; font-weight: 100; font-size: 15px"
+                  ></timeago>
+                </div>
+              </v-card-text>
+
+              <v-divider class="mx-4"></v-divider>
+              <v-card-actions>
+                <v-btn
+                  color="orange darken-2"
+                  text
+                  @click="getItemPage(x[0], x[6])"
+                >
+                  View
+                </v-btn>
+                <v-btn color="orange darken-2" text @click="contactOwner(x[6])">
+                  Contact
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// import firebase from 'firebase'
+import firebase from "firebase";
+import { roomsRef } from "../../firebase";
+
+export default {
+  data() {
+    return {
+      items: [],
+      profiles: [],
+      subcats: [
+        "Mobile & Electronics",
+        "Hobbies & Games",
+        "Sports",
+        "Education",
+        "Fashion",
+        "Miscellaneous",
+      ],
+      rating: 0,
+      name: "",
+      numRatings: 0,
+      profileURL: "",
+      user: localStorage.UID,
+      date: new Date(),
+    };
+  },
+  methods: {
+    fetchItems: function(x) {
+      // database.collection('Listings').get()
+      // firebase.firestore().collection('Listings').get()
+      this.items = [];
+      if (x === "all") {
+        firebase
+          .firestore()
+          .collection("Listings")
+          .where("Type", "==", "sale")
+          .orderBy("date", "desc")
+          .get()
+          .then((querySnapShot) => {
+            querySnapShot.forEach(async (doc) => {
+              let item = doc.data();
+              //console.log(item.UserID);
+              await firebase
+                .firestore()
+                .collection("users")
+                .where("id", "==", item.UserID)
+                .get()
+                .then((res) => {
+                  if (res.docs[0].data().numRatings == 0) {
+                    this.rating = 0;
+                  } else {
+                    this.rating = (
+                      res.docs[0].data().Rating / res.docs[0].data().numRatings
+                    ).toFixed(2);
+                  }
+
+                  this.name = res.docs[0].data().Name;
+                  this.numRating = res.docs[0].data().numRatings;
+                  this.profileURL = res.docs[0].data().ProfileURL;
+                  this.items.push([
+                    doc.id,
+                    item,
+                    this.rating,
+                    this.name,
+                    this.numRating,
+                    this.profileURL,
+                    item.UserID,
+                  ]);
+                });
+            });
+          });
+      } else {
+        firebase
+          .firestore()
+          .collection("Listings")
+          .where("Type", "==", "sale")
+          .where("Subcat", "==", x)
+          .orderBy("date", "desc")
+          .get()
+          .then((querySnapShot) => {
+            querySnapShot.forEach(async (doc) => {
+              let item = doc.data();
+              //console.log(item.UserID);
+              await firebase
+                .firestore()
+                .collection("users")
+                .where("id", "==", item.UserID)
+                .get()
+                .then((res) => {
+                  if (res.docs[0].data().numRatings == 0) {
+                    this.rating = 0;
+                  } else {
+                    this.rating = (
+                      res.docs[0].data().Rating / res.docs[0].data().numRatings
+                    ).toFixed(2);
+                  }
+                  this.name = res.docs[0].data().Name;
+                  this.numRating = res.docs[0].data().numRatings;
+                  this.profileURL = res.docs[0].data().ProfileURL;
+                  this.items.push([
+                    doc.id,
+                    item,
+                    this.rating,
+                    this.name,
+                    this.numRating,
+                    this.profileURL,
+                    item.UserID,
+                  ]);
+                });
+            });
+          });
+      }
+      this.items.forEach((x) => {
+        firebase
+          .firestore()
+          .collection("User")
+          .doc(x[0])
+          .get()
+          .then((x) => {
+            this.profiles.push(x);
+          });
+      });
+    },
+    contactOwner: async function(ownerId) {
+      if (ownerId == this.user) {
+        return alert("this is your own store!!!");
+      }
+      //const chatRoomUsers = [ownerId, this.user];
+      const query1 = await roomsRef
+        .where("users", "==", [ownerId, this.user])
+        .get();
+
+      if (!query1.empty) {
+        return this.$router.push({ path: `/chat` });
+      }
+
+      let query2 = await roomsRef
+        .where("users", "==", [this.user, ownerId])
+        .get();
+
+      if (!query2.empty) {
+        return this.$router.push({ path: `/chat` });
+      }
+      roomsRef
+        .add({
+          users: [ownerId, this.user],
+          lastUpdated: new Date(),
+        })
+        .then(() => {
+          this.$router.push({ path: `/chat` });
+        });
+    },
+    goToShopFront: function(userId) {
+      this.$router.push({
+        path: "/Shopfront",
+        name: "Shopfront",
+        params: { user: userId, tabs: "Listings" },
+        props: true,
+      });
+    },
+    getItemPage: function(listingID, userId) {
+      this.$router.push({
+        name: "itemPage",
+        params: { listing: listingID, userId: userId },
+      });
+    },
+  },
+  created() {
+    this.fetchItems("all");
+  },
+};
+</script>
+
+<style scoped></style>
