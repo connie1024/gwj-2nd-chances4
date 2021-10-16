@@ -15,3 +15,18 @@
 
       <v-tab v-on:click="fetchItems('rent')">
         Rental
+      </v-tab>
+    </v-tabs>
+    <div v-if="this.items.length === 0">
+      No search results found!
+    </div>
+    <div class="flex">
+      <v-row style="">
+        <v-col
+          v-for="(x, i) in items"
+          v-bind:key="i"
+          col="12"
+          sm="6"
+          md="4"
+          lg="3"
+        >
