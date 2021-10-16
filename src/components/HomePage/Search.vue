@@ -30,3 +30,11 @@
           md="4"
           lg="3"
         >
+          <v-card :loading="false" class="mx-auto my-12" max-width="374">
+            <v-card-actions>
+              <v-list-item class="grow" style="font-weight: 700">
+                <v-list-item-avatar
+                  color="grey darken-3"
+                  @click="goToShopFront(x[6])"
+                >
+         
