@@ -66,4 +66,14 @@
               ></v-progress-linear>
             </template>
 
-            <v-img height="250" v-bind:src="x[1].images[0]"><
+            <v-img height="250" v-bind:src="x[1].images[0]"></v-img>
+
+            <v-card-title>{{ x[1]["Title"] }}</v-card-title>
+
+            <v-card-text>
+              <div class="my-2 subtitle-1">
+                <strong>Location:</strong> {{ x[1]["Location"] }}
+              </div>
+            </v-card-text>
+
+            <v-divider
