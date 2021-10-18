@@ -57,4 +57,13 @@
               ></v-rating>
 
               <div class="grey--text ml-4">{{ x[2] }} ({{ x[4] }} reviews)</div>
-     
+            </v-row>
+            <template slot="progress">
+              <v-progress-linear
+                color="deep-purple"
+                height="10"
+                indeterminate
+              ></v-progress-linear>
+            </template>
+
+            <v-img height="250" v-bind:src="x[1].images[0]"><
