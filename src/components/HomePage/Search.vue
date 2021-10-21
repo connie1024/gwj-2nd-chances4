@@ -87,4 +87,12 @@
                 View
               </v-btn>
               <v-btn
-                color="orange darken
+                color="orange darken-2"
+                text
+                @click="getItemRentalPage(x[0], x[6])"
+                v-if="currentTab === 'rent'"
+              >
+                View
+              </v-btn>
+              <v-btn color="orange darken-2" text @click="contactOwner(x[6])">
+                Contact
