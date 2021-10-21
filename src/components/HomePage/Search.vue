@@ -76,4 +76,15 @@
               </div>
             </v-card-text>
 
-            <v-divider
+            <v-divider class="mx-4"></v-divider>
+            <v-card-actions>
+              <v-btn
+                color="orange darken-2"
+                text
+                @click="getItemPage(x[0], x[6])"
+                v-if="currentTab === 'sale'"
+              >
+                View
+              </v-btn>
+              <v-btn
+                color="orange darken
