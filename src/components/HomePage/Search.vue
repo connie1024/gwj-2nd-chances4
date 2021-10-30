@@ -113,3 +113,20 @@ export default {
   data() {
     return {
       name: "",
+      profile: "",
+      rating: 0,
+      numRatings: 0,
+      profileURL: "",
+      items: [],
+      searchterm: "",
+      currentTab: "sale",
+      user: localStorage.UID,
+    };
+  },
+  components: {},
+  created() {
+    this.fetchItems("sale");
+  },
+  methods: {
+    getItemRentalPage: function(listingID, userId) {
+  
