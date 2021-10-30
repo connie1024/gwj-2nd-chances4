@@ -96,3 +96,20 @@
               </v-btn>
               <v-btn color="orange darken-2" text @click="contactOwner(x[6])">
                 Contact
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </div>
+  </div>
+</template>
+
+<script>
+import firebase from "firebase";
+import { roomsRef } from "../../firebase";
+
+export default {
+  data() {
+    return {
+      name: "",
