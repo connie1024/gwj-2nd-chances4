@@ -140,4 +140,13 @@ export default {
         params: { listing: listingID, userId: userId },
       });
     },
-    contactOwner: async function(
+    contactOwner: async function(ownerId) {
+      if (ownerId == this.user) {
+        return alert("this is your own store!");
+      }
+      //const chatRoomUsers = [ownerId, this.user];
+      const query1 = await roomsRef
+        .where("users", "==", [ownerId, this.user])
+        .get();
+
+      if (!query1.empty) 
