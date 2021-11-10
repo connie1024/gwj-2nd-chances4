@@ -129,4 +129,15 @@ export default {
   },
   methods: {
     getItemRentalPage: function(listingID, userId) {
-  
+      this.$router.push({
+        name: "itemPageRent",
+        params: { listing: listingID, userId: userId },
+      });
+    },
+    getItemPage: function(listingID, userId) {
+      this.$router.push({
+        name: "itemPage",
+        params: { listing: listingID, userId: userId },
+      });
+    },
+    contactOwner: async function(
