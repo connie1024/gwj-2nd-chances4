@@ -149,4 +149,17 @@ export default {
         .where("users", "==", [ownerId, this.user])
         .get();
 
-      if (!query1.empty) 
+      if (!query1.empty) {
+        return this.$router.push({ path: `/chat` });
+      }
+
+      let query2 = await roomsRef
+        .where("users", "==", [this.user, ownerId])
+        .get();
+
+      if (!query2.empty) {
+        return this.$router.push({ path: `/chat` });
+      }
+      roomsRef
+        .add({
+          users: [owne
