@@ -162,4 +162,16 @@ export default {
       }
       roomsRef
         .add({
-          users: [owne
+          users: [ownerId, this.user],
+          lastUpdated: new Date(),
+        })
+        .then(() => {
+          this.$router.push({ path: `/chat` });
+        });
+    },
+    goToShopFront: function(userId) {
+      this.$router.push({
+        path: "/Shopfront",
+        name: "Shopfront",
+        params: { user: userId },
+     
