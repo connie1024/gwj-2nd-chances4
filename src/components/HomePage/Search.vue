@@ -174,4 +174,14 @@ export default {
         path: "/Shopfront",
         name: "Shopfront",
         params: { user: userId },
-     
+        props: true,
+      });
+    },
+    fetchItems: function(x) {
+      // database.collection('Listings').get()
+      // firebase.firestore().collection('Listings').get()
+      this.searchterm = this.$route.params.searchterm;
+      this.currentTab = x;
+      this.items = [];
+      firebase
+ 
