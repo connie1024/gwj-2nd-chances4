@@ -184,4 +184,13 @@ export default {
       this.currentTab = x;
       this.items = [];
       firebase
- 
+        .firestore()
+        .collection("Listings")
+        .where("Type", "==", x)
+        .get()
+        .then((querySnapShot) => {
+          querySnapShot.forEach(async (doc) => {
+            let item = doc.data();
+            //console.log(item.UserID);
+            await firebase
+              .fires
