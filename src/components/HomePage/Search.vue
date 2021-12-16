@@ -193,4 +193,12 @@ export default {
             let item = doc.data();
             //console.log(item.UserID);
             await firebase
-              .fires
+              .firestore()
+              .collection("users")
+              .where("id", "==", item.UserID)
+              .get()
+              .then((res) => {
+                this.rating = res.docs[0].data().Rating;
+                this.name = res.docs[0].data().Name;
+                this.numRating = res.docs[0].data().numRatings;
+   
