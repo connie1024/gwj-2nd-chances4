@@ -201,4 +201,11 @@ export default {
                 this.rating = res.docs[0].data().Rating;
                 this.name = res.docs[0].data().Name;
                 this.numRating = res.docs[0].data().numRatings;
-   
+                this.profileURL = res.docs[0].data().ProfileURL;
+                if (
+                  item["Title"]
+                    .toLowerCase()
+                    .includes(this.searchterm.toLowerCase())
+                ) {
+                  this.items.push([
+                    doc.
