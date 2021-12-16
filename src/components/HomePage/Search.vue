@@ -208,4 +208,16 @@ export default {
                     .includes(this.searchterm.toLowerCase())
                 ) {
                   this.items.push([
-                    doc.
+                    doc.id,
+                    item,
+                    this.rating,
+                    this.name,
+                    this.numRating,
+                    this.profileURL,
+                    item.UserID,
+                  ]);
+                }
+              });
+          });
+        });
+      // console.log("title"
