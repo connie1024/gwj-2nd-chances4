@@ -220,4 +220,15 @@ export default {
               });
           });
         });
-      // console.log("title"
+      // console.log("title"+this.items[0][1]['Title']);
+      //  this.items.filter(x=> x[1]['Title'].includes(this.searchterm));
+      this.items.forEach((x) => {
+        firebase
+          .firestore()
+          .collection("User")
+          .doc(x[0])
+          .get()
+          .then((x) => {
+            this.profiles.push(x);
+          });
+      });
