@@ -232,3 +232,14 @@ export default {
             this.profiles.push(x);
           });
       });
+    },
+  },
+};
+</script>
+
+<style scoped>
+#mx-auto {
+  position: absolute;
+  top: 50px;
+}
+</style>
