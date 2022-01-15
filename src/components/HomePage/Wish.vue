@@ -15,4 +15,11 @@
             <v-card :loading="false" class="mx-auto my-12" max-width="374">
               <v-card-actions>
                 <v-list-item class="grow" style="font-weight: 700">
-                  <v-list
+                  <v-list-item-avatar
+                    color="grey darken-3"
+                    @click="goToShopFront(x[6])"
+                  >
+                    <img v-bind:src="x[5]" class="elevation-6" alt="" />
+                  </v-list-item-avatar>
+                  {{ x[3] }}
+    
