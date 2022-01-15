@@ -22,4 +22,13 @@
                     <img v-bind:src="x[5]" class="elevation-6" alt="" />
                   </v-list-item-avatar>
                   {{ x[3] }}
-    
+                </v-list-item>
+              </v-card-actions>
+
+              <v-row
+                align="center"
+                class="mx-0"
+                style="margin-bottom: 10px; padding-left: 20px;"
+              >
+                <v-rating
+                  v-bind:value="x[2
