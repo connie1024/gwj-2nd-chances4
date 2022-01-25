@@ -51,4 +51,14 @@
                 ></v-progress-linear>
               </template>
 
-              <v-img height="250" v-bind:src="x[1].
+              <v-img height="250" v-bind:src="x[1].images[0]"></v-img>
+
+              <v-card-title>Wish: {{ x[1]["Title"] }}</v-card-title>
+
+              <v-card-text>
+                <div class="my-2 subtitle-1">
+                  <strong>Description</strong>
+                  <p>{{ x[1]["Description"] }}</p>
+                </div>
+
+                <d
