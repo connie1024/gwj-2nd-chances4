@@ -31,4 +31,15 @@
                 style="margin-bottom: 10px; padding-left: 20px;"
               >
                 <v-rating
-                  v-bind:value="x[2
+                  v-bind:value="x[2]"
+                  color="amber"
+                  dense
+                  half-increments
+                  readonly
+                  size="14"
+                ></v-rating>
+
+                <div class="grey--text ml-4">
+                  {{ x[2] }} ({{ x[4] }} reviews)
+                </div>
+       
