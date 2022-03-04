@@ -69,4 +69,13 @@
                 <div class="my-2">
                   <strong>TimeListed:</strong>
                   <timeago
-                    :datetime=
+                    :datetime="x[1]['date'].toDate()"
+                    :auto-update="60"
+                    style="padding-left: 5px; font-weight: 100; font-size: 15px"
+                  ></timeago>
+                </div>
+              </v-card-text>
+
+              <v-divider class="mx-4"></v-divider>
+              <v-card-actions>
+   
