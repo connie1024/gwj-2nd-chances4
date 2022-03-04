@@ -78,4 +78,15 @@
 
               <v-divider class="mx-4"></v-divider>
               <v-card-actions>
-   
+                <v-btn
+                  color="orange darken-2"
+                  text
+                  @click="contactOwner(x[6], x[1])"
+                >
+                  Contact
+                </v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-col>
+        </v-row>
+     
