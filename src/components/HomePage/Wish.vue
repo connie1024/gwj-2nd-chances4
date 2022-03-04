@@ -61,4 +61,12 @@
                   <p>{{ x[1]["Description"] }}</p>
                 </div>
 
-                <d
+                <div class="my-2 subtitle-1">
+                  <strong>Location</strong>
+                  <p>{{ x[1]["Location"] }}</p>
+                </div>
+
+                <div class="my-2">
+                  <strong>TimeListed:</strong>
+                  <timeago
+                    :datetime=
