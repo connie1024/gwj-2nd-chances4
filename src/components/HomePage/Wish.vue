@@ -89,4 +89,21 @@
             </v-card>
           </v-col>
         </v-row>
-     
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+// import firebase from 'firebase'
+import firebase from "firebase";
+import { roomsRef } from "../../firebase";
+
+export default {
+  data() {
+    return {
+      items: [],
+      profiles: [],
+      subcats: [
+        "Mobile & Electronics",
+        "Hobbie
