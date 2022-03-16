@@ -106,4 +106,20 @@ export default {
       profiles: [],
       subcats: [
         "Mobile & Electronics",
-        "Hobbie
+        "Hobbies & Games",
+        "Sports",
+        "Education",
+        "Fashion",
+        "Miscellaneous",
+      ],
+      rating: 0,
+      name: "",
+      numRatings: 0,
+      profileURL: "",
+      user: localStorage.UID,
+      date: new Date(),
+    };
+  },
+  methods: {
+    toListing: function() {
+      this.$router.push({
