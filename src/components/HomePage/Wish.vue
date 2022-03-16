@@ -122,4 +122,13 @@ export default {
   },
   methods: {
     toListing: function() {
-      this.$router.push({
+      this.$router.push({ path: `/newListing`, name: "newListing" });
+    },
+    fetchItems: function() {
+      // database.collection('Listings').get()
+      // firebase.firestore().collection('Listings').get()
+      this.items = [];
+      firebase
+        .firestore()
+        .collection("Listings")
+        .where("Type", "==",
