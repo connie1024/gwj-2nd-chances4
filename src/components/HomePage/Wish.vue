@@ -131,4 +131,13 @@ export default {
       firebase
         .firestore()
         .collection("Listings")
-        .where("Type", "==",
+        .where("Type", "==", "wish")
+        .orderBy("date", "desc")
+        .get()
+        .then((querySnapShot) => {
+          querySnapShot.forEach(async (doc) => {
+            let item = doc.data();
+            //console.log(item.UserID);
+            await firebase
+              .firestore()
+              .collectio
