@@ -140,4 +140,12 @@ export default {
             //console.log(item.UserID);
             await firebase
               .firestore()
-              .collectio
+              .collection("users")
+              .where("id", "==", item.UserID)
+              .get()
+              .then((res) => {
+                if (res.docs[0].data().numRatings == 0) {
+                  this.rating = 0;
+                } else {
+                  this.rating = (
+               
