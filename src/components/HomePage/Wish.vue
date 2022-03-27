@@ -148,4 +148,11 @@ export default {
                   this.rating = 0;
                 } else {
                   this.rating = (
+                    res.docs[0].data().Rating / res.docs[0].data().numRatings
+                  ).toFixed(2);
+                }
+
+                this.name = res.docs[0].data().Name;
+                this.numRating = res.docs[0].data().numRatings;
+                this.profileURL = res.docs[0].data().ProfileURL;
                
