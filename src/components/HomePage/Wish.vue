@@ -155,4 +155,15 @@ export default {
                 this.name = res.docs[0].data().Name;
                 this.numRating = res.docs[0].data().numRatings;
                 this.profileURL = res.docs[0].data().ProfileURL;
-               
+                this.items.push([
+                  doc.id,
+                  item,
+                  this.rating,
+                  this.name,
+                  this.numRating,
+                  this.profileURL,
+                  item.UserID,
+                ]);
+              });
+          });
+        });
