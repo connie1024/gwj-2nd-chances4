@@ -167,3 +167,16 @@ export default {
               });
           });
         });
+      console.log(this.items);
+      this.items.forEach((x) => {
+        firebase
+          .firestore()
+          .collection("User")
+          .doc(x[0])
+          .get()
+          .then((x) => {
+            this.profiles.push(x);
+          });
+      });
+    },
+    contactOwner: async funct
