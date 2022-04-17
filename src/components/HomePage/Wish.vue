@@ -198,4 +198,14 @@ export default {
               .collection("messages")
               .add({
                 content:
-                  "I 
+                  "I am able to offer " +
+                  item.Title +
+                  "\n" +
+                  "Type: " +
+                  item.Type +
+                  "\n" +
+                  "Subcat: " +
+                  item.Subcat +
+                  "\n" +
+                  "Location: " +
+                  item.Loc
