@@ -208,4 +208,15 @@ export default {
                   item.Subcat +
                   "\n" +
                   "Location: " +
-                  item.Loc
+                  item.Location,
+                file: {
+                  extension: "png",
+                  name: item.Title,
+                  type: "image/png",
+                  url: item.images[0],
+                },
+                sender_id: this.user,
+                timestamp: new Date(),
+              });
+          });
+     
