@@ -251,4 +251,15 @@ export default {
                   item.Location,
                 file: {
                   extension: "png",
-                  name: 
+                  name: item.Title,
+                  type: "image/png",
+                  url: item.images[0],
+                },
+                sender_id: this.user,
+                timestamp: new Date(),
+              });
+          });
+        console.log(query2.docs);
+        return this.$router.push({ path: `/chat` });
+      }
+  
