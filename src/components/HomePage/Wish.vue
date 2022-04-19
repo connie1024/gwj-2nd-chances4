@@ -242,4 +242,13 @@ export default {
                   item.Title +
                   "\n" +
                   "Type: " +
-           
+                  item.Type +
+                  "\n" +
+                  "Subcat: " +
+                  item.Subcat +
+                  "\n" +
+                  "Location: " +
+                  item.Location,
+                file: {
+                  extension: "png",
+                  name: 
