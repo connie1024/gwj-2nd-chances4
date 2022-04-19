@@ -231,4 +231,15 @@ export default {
         roomsRef
           .where("users", "==", [this.user, ownerId])
           .get()
-    
+          .then(async (res) => {
+            console.log(res.docs[0].id);
+            await roomsRef
+              .doc(res.docs[0].id)
+              .collection("messages")
+              .add({
+                content:
+                  "I am able to offer " +
+                  item.Title +
+                  "\n" +
+                  "Type: " +
+           
