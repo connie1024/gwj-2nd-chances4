@@ -273,4 +273,12 @@ export default {
             .get()
             .then(async () => {
               await roomsRef
-       
+                .doc(res.id)
+                .collection("messages")
+                .add({
+                  content:
+                    "I am able to offer " +
+                    item.Title +
+                    "\n" +
+                    "Type: " +
+                    item.Typ
