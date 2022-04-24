@@ -262,4 +262,15 @@ export default {
         console.log(query2.docs);
         return this.$router.push({ path: `/chat` });
       }
-  
+      roomsRef
+        .add({
+          users: [ownerId, this.user],
+          lastUpdated: new Date(),
+        })
+        .then((res) => {
+          roomsRef
+            .where("users", "==", [this.user, ownerId])
+            .get()
+            .then(async () => {
+              await roomsRef
+       
