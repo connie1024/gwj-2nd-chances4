@@ -311,4 +311,16 @@ export default {
       });
     },
     getItemPage: function(listingID, userId) {
-  
+      this.$router.push({
+        name: "itemPage",
+        params: { listing: listingID, userId: userId },
+      });
+    },
+  },
+  created() {
+    this.fetchItems();
+  },
+};
+</script>
+
+<style scoped></style>
