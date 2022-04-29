@@ -299,4 +299,16 @@ export default {
                 });
               await roomsRef.doc(res.id).update({ lastUpdated: new Date() });
             });
-          this.$router
+          this.$router.push({ path: `/chat` });
+        });
+    },
+    goToShopFront: function(userId) {
+      this.$router.push({
+        path: "/Shopfront",
+        name: "Shopfront",
+        params: { user: userId, tabs: "Listings" },
+        props: true,
+      });
+    },
+    getItemPage: function(listingID, userId) {
+  
