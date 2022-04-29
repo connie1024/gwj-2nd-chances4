@@ -291,4 +291,12 @@ export default {
                   file: {
                     extension: "png",
                     name: item.Title,
-                  
+                    type: "image/png",
+                    url: item.images[0],
+                  },
+                  sender_id: this.user,
+                  timestamp: new Date(),
+                });
+              await roomsRef.doc(res.id).update({ lastUpdated: new Date() });
+            });
+          this.$router
