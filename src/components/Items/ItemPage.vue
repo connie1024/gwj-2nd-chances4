@@ -117,3 +117,196 @@ export default {
       itemInfo: [],
       rating: 0,
       name: "",
+      numRatings: 0,
+      profileURL: "",
+      user: localStorage.UID,
+    };
+  },
+  methods: {
+    reportListing: function() {
+      alert("This listing has been reported, Thanks for your feedback!");
+    },
+    contactOwner: async function(ownerId) {
+      if (ownerId == this.user) {
+        return alert("this is your own store!");
+      }
+      //const chatRoomUsers = [ownerId, this.user];
+      const query1 = await roomsRef
+        .where("users", "==", [ownerId, this.user])
+        .get();
+
+      if (!query1.empty) {
+        roomsRef
+          .where("users", "==", [ownerId, this.user])
+          .get()
+          .then(async (res) => {
+            await roomsRef
+              .doc(res.docs[0].id)
+              .collection("messages")
+              .add({
+                content:
+                  "I am interested in " +
+                  this.itemInfo[0][1].Title +
+                  "\n" +
+                  "Type: " +
+                  this.itemInfo[0][1].Type +
+                  "\n" +
+                  "Subcat: " +
+                  this.itemInfo[0][1].Subcat +
+                  "\n" +
+                  "Location: " +
+                  this.itemInfo[0][1].Location,
+                file: {
+                  extension: "png",
+                  name: this.itemInfo[0][1].Title,
+                  type: "image/png",
+                  url: this.itemInfo[0][1].images[0],
+                },
+                sender_id: this.user,
+                timestamp: new Date(),
+              });
+            await roomsRef
+              .doc(res.docs[0].id)
+              .update({ lastUpdated: new Date() });
+          });
+        return this.$router.push({ path: `/chat` });
+      }
+
+      let query2 = await roomsRef
+        .where("users", "==", [this.user, ownerId])
+        .get();
+
+      if (!query2.empty) {
+        console.log("hello");
+        roomsRef
+          .where("users", "==", [this.user, ownerId])
+          .get()
+          .then(async (res) => {
+            console.log(res.docs[0].id);
+            await roomsRef
+              .doc(res.docs[0].id)
+              .collection("messages")
+              .add({
+                content:
+                  "I am interested in " +
+                  this.itemInfo[0][1].Title +
+                  "\n" +
+                  "Type: " +
+                  this.itemInfo[0][1].Type +
+                  "\n" +
+                  "Subcat: " +
+                  this.itemInfo[0][1].Subcat +
+                  "\n" +
+                  "Location: " +
+                  this.itemInfo[0][1].Location,
+                file: {
+                  extension: "png",
+                  name: this.itemInfo[0][1].Title,
+                  type: "image/png",
+                  url: this.itemInfo[0][1].images[0],
+                },
+                sender_id: this.user,
+                timestamp: new Date(),
+              });
+            await roomsRef
+              .doc(res.docs[0].id)
+              .update({ lastUpdated: new Date() });
+          });
+        console.log(query2.docs);
+        return this.$router.push({ path: `/chat` });
+      }
+      roomsRef
+        .add({
+          users: [ownerId, this.user],
+          lastUpdated: new Date(),
+        })
+        .then((res) => {
+          roomsRef
+            .where("users", "==", [this.user, ownerId])
+            .get()
+            .then(async () => {
+              await roomsRef
+                .doc(res.id)
+                .collection("messages")
+                .add({
+                  content:
+                    "I am interested in " +
+                    this.itemInfo[0][1].Title +
+                    "\n" +
+                    "Type: " +
+                    this.itemInfo[0][1].Type +
+                    "\n" +
+                    "Subcat: " +
+                    this.itemInfo[0][1].Subcat +
+                    "\n" +
+                    "Location: " +
+                    this.itemInfo[0][1].Location,
+                  file: {
+                    extension: "png",
+                    name: this.itemInfo[0][1].Title,
+                    type: "image/png",
+                    url: this.itemInfo[0][1].images[0],
+                  },
+                  sender_id: this.user,
+                  timestamp: new Date(),
+                });
+              await roomsRef.doc(res.id).update({ lastUpdated: new Date() });
+            });
+          this.$router.push({ path: `/chat` });
+        });
+    },
+    toReviews: function() {
+      this.$router.push({
+        path: "/Shopfront",
+        name: "Shopfront",
+        params: { user: this.userId, tabs: "reviews" },
+        props: true,
+      });
+    },
+    fetchItem: function(listing) {
+      if (listing) {
+        localStorage.setItem("lastItemViewed", listing);
+      } else {
+        listing = localStorage.getItem("lastItemViewed");
+      }
+      this.itemInfo = [];
+      firebase
+        .firestore()
+        .collection("Listings")
+        .doc(listing)
+        .get()
+        .then((doc) => {
+          let item = doc.data();
+          firebase
+            .firestore()
+            .collection("users")
+            .where("id", "==", item.UserID)
+            .get()
+            .then((res) => {
+              this.rating = res.docs[0].data().Rating;
+              this.name = res.docs[0].data().Name;
+              this.numRating = res.docs[0].data().numRatings;
+              this.profileURL = res.docs[0].data().ProfileURL;
+              this.itemInfo.push([
+                doc.id,
+                item,
+                this.rating,
+                this.name,
+                this.numRating,
+                this.profileURL,
+                item.UserID,
+              ]);
+            });
+        });
+    },
+  },
+  components: {},
+  created() {
+    this.fetchItem(this.listing);
+  },
+};
+</script>
+
+<style scoped>
+/*  */
+</style>
