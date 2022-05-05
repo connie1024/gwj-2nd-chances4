@@ -21,4 +21,12 @@
                       ></v-carousel-item>
                     </v-carousel>
                     <!-- <v-img
-     
+                      height="600"
+                      :width="600"
+                      v-bind:src="x[1].images[0]"
+                    ></v-img> -->
+                  </v-card>
+                </v-col>
+                <v-col md="6">
+                  <v-card color="grey lighten-4">
+                    <v-card-action
