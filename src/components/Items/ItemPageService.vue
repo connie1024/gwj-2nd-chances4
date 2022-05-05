@@ -14,4 +14,11 @@
                 <v-col md="6">
                   <v-card color="grey lighten-4">
                     <v-carousel>
-           
+                      <v-carousel-item
+                        v-for="(item, i) in x[1].images"
+                        :key="i"
+                        :src="item"
+                      ></v-carousel-item>
+                    </v-carousel>
+                    <!-- <v-img
+     
