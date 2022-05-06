@@ -52,4 +52,11 @@
                       ></v-rating>
 
                       <div style="padding-left: 5px">
-                        {{ x[2] }} ({{ x[4]
+                        {{ x[2] }} ({{ x[4] }} reviews)
+                      </div>
+                    </v-row>
+                    <v-card-text class="text-left">
+                      <p><strong>Options:</strong> ${{ x[1]["Price"] }}</p>
+                      <p>
+                        <strong>Price:</strong>
+                        ${{ x[1]["Price"] }} per
