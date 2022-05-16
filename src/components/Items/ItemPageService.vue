@@ -60,3 +60,9 @@
                       <p>
                         <strong>Price:</strong>
                         ${{ x[1]["Price"] }} per
+                        {{ x[1]["service"]["Interval"] }}
+                      </p>
+                      <p>
+                        <strong>Description:</strong> {{ x[1]["Description"] }}
+                      </p>
+                      <p><strong>Location:</strong> {{ x[1]["Location"] }}</p
