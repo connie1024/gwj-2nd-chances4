@@ -65,4 +65,11 @@
                       <p>
                         <strong>Description:</strong> {{ x[1]["Description"] }}
                       </p>
-                      <p><strong>Location:</strong> {{ x[1]["Location"] }}</p
+                      <p><strong>Location:</strong> {{ x[1]["Location"] }}</p>
+                      <div class="my-2">
+                        <strong>TimeListed:</strong>
+                        <timeago
+                          :datetime="x[1]['date'].toDate()"
+                          :auto-update="60"
+                          style="padding-left: 5px; font-weight: 100; font-size: 15px"
+          
