@@ -72,4 +72,14 @@
                           :datetime="x[1]['date'].toDate()"
                           :auto-update="60"
                           style="padding-left: 5px; font-weight: 100; font-size: 15px"
-          
+                        ></timeago>
+                      </div>
+                    </v-card-text>
+                  </v-card>
+                </v-col>
+              </v-row>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+
+              <v-btn color="warning
