@@ -82,4 +82,12 @@
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn color="warning
+              <v-btn color="warning" @click="contactOwner(userId)">
+                Chat Now
+              </v-btn>
+              <v-btn color="white" @click="toReviews">
+                See all reviews
+              </v-btn>
+              <v-btn color="error" @click="reportListing">
+                Report Listing
+              </v-b
