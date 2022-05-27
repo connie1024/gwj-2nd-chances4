@@ -108,4 +108,17 @@ export default {
   props: ["listing", "userId"],
   data() {
     return {
-      itemInf
+      itemInfo: [],
+      rating: 0,
+      name: "",
+      numRatings: 0,
+      profileURL: "",
+      user: localStorage.UID,
+    };
+  },
+  methods: {
+    reportListing: function() {
+      alert("This listing has been reported, Thanks for your feedback!");
+    },
+    contactOwner: async function(ownerId) {
+      if (ownerId 
