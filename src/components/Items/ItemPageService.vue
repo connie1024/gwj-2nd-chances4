@@ -90,4 +90,22 @@
               </v-btn>
               <v-btn color="error" @click="reportListing">
                 Report Listing
-              </v-b
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
+</template>
+
+<script>
+// import firebase from 'firebase'
+import firebase from "firebase";
+import { roomsRef } from "../../firebase";
+
+export default {
+  props: ["listing", "userId"],
+  data() {
+    return {
+      itemInf
