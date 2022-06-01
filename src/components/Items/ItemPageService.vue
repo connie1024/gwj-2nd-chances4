@@ -131,4 +131,13 @@ export default {
 
       if (!query1.empty) {
         roomsRef
-          .where("users", "==", [ownerId, this.us
+          .where("users", "==", [ownerId, this.user])
+          .get()
+          .then(async (res) => {
+            await roomsRef
+              .doc(res.docs[0].id)
+              .collection("messages")
+              .add({
+                content:
+                  "I am interested in " +
+                  this.it
