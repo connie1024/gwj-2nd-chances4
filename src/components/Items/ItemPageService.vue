@@ -160,4 +160,16 @@ export default {
                 timestamp: new Date(),
               });
           });
-        
+        return this.$router.push({ path: `/chat` });
+      }
+
+      let query2 = await roomsRef
+        .where("users", "==", [this.user, ownerId])
+        .get();
+
+      if (!query2.empty) {
+        console.log("hello");
+        roomsRef
+          .where("users", "==", [this.user, ownerId])
+          .get()
+       
