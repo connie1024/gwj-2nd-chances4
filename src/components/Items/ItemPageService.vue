@@ -149,4 +149,15 @@ export default {
                   this.itemInfo[0][1].Subcat +
                   "\n" +
                   "Location: " +
-                  this.itemInfo[0][1].Lo
+                  this.itemInfo[0][1].Location,
+                file: {
+                  extension: "png",
+                  name: this.itemInfo[0][1].Title,
+                  type: "image/png",
+                  url: this.itemInfo[0][1].images[0],
+                },
+                sender_id: this.user,
+                timestamp: new Date(),
+              });
+          });
+        
