@@ -200,4 +200,16 @@ export default {
                 timestamp: new Date(),
               });
           });
-        consol
+        console.log(query2.docs);
+        return this.$router.push({ path: `/chat` });
+      }
+      roomsRef
+        .add({
+          users: [ownerId, this.user],
+          lastUpdated: new Date(),
+        })
+        .then(() => {
+          this.$router.push({ path: `/chat` });
+        });
+    },
+    toReviews:
