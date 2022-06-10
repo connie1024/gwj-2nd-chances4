@@ -181,4 +181,13 @@ export default {
                 content:
                   "I am interested in " +
                   this.itemInfo[0][1].Title +
-    
+                  "\n" +
+                  "Type: " +
+                  this.itemInfo[0][1].Type +
+                  "\n" +
+                  "Subcat: " +
+                  this.itemInfo[0][1].Subcat +
+                  "\n" +
+                  "Location: " +
+                  this.itemInfo[0][1].Location,
+                file:
