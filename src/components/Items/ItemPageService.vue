@@ -235,4 +235,13 @@ export default {
             .where("id", "==", item.UserID)
             .get()
             .then((res) => {
-              this.rating = res.docs[0].
+              this.rating = res.docs[0].data().Rating;
+              this.name = res.docs[0].data().Name;
+              this.numRating = res.docs[0].data().numRatings;
+              this.profileURL = res.docs[0].data().ProfileURL;
+              this.itemInfo.push([
+                doc.id,
+                item,
+                this.rating,
+                this.name,
+             
