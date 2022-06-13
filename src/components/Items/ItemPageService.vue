@@ -224,4 +224,15 @@ export default {
       this.itemInfo = [];
       firebase
         .firestore()
-        .collection("L
+        .collection("Listings")
+        .doc(listing)
+        .get()
+        .then((doc) => {
+          let item = doc.data();
+          firebase
+            .firestore()
+            .collection("users")
+            .where("id", "==", item.UserID)
+            .get()
+            .then((res) => {
+              this.rating = res.docs[0].
