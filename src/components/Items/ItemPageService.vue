@@ -212,4 +212,16 @@ export default {
           this.$router.push({ path: `/chat` });
         });
     },
-    toReviews:
+    toReviews: function() {
+      this.$router.push({
+        path: "/Shopfront",
+        name: "Shopfront",
+        params: { user: this.userId, tabs: "reviews" },
+        props: true,
+      });
+    },
+    fetchItem: function(listing) {
+      this.itemInfo = [];
+      firebase
+        .firestore()
+        .collection("L
