@@ -244,4 +244,21 @@ export default {
                 item,
                 this.rating,
                 this.name,
-             
+                this.numRating,
+                this.profileURL,
+                item.UserID,
+              ]);
+            });
+        });
+    },
+  },
+  components: {},
+  created() {
+    this.fetchItem(this.listing);
+  },
+};
+</script>
+
+<style scoped>
+/*  */
+</style>
