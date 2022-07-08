@@ -46,3 +46,100 @@
     <div v-if="currentTab === 'Listings'">
       <UserListings
         v-bind:user="user"
+        v-bind:profile="true"
+        v-bind:rating="rating"
+        v-bind:numRatings="numRatings"
+        v-bind:name="name"
+        v-bind:profileURL="profile"
+        v-bind:isSameUser="isSameUser"
+      ></UserListings>
+    </div>
+    <div v-if="currentTab === 'reviews'">
+      <Reviews v-bind:shopOwner="user"></Reviews>
+    </div>
+  </div>
+</template>
+
+<script>
+import firebase from "firebase";
+import UserListings from "../UserPage/UserListings";
+import Reviews from "../UserPage/Reviews";
+
+export default {
+  props: ["user", "tabs"],
+  data() {
+    return {
+      currentTab: this.tabs,
+      name: "",
+      email: "",
+      profile: "",
+      rating: 0,
+      biography: "",
+      dialog: false,
+      background: "",
+    };
+  },
+  components: {
+    UserListings,
+    Reviews,
+  },
+  created() {
+    if (this.user) {
+      localStorage.setItem("lastShopViewed", this.user);
+    } else {
+      this.user = localStorage.getItem("lastShopViewed");
+    }
+
+    // if (this.user === localStorage.getItem("UID")) {
+    //   this.$router.push({
+    //     path: `/profile`,
+    //     name: "profile",
+    //     params: { user: localStorage.UID },
+    //     props: true,
+    //   });
+    // }
+    console.log(this.user);
+    firebase
+      .firestore()
+      .collection("users")
+      .where("id", "==", this.user)
+      .get()
+      .then((res) => {
+        const data = res.docs[0].data();
+        this.name = data.Name;
+        this.email = data.Email;
+        this.profile = data.ProfileURL;
+        this.rating = data.Rating;
+        this.biography = data.Biography;
+        this.background = data.BackgroundURL;
+        this.rating = data.Rating;
+        this.numRatings = data.numRatings;
+        console.log(this.name);
+      });
+  },
+  methods: {
+    updateUser: function() {
+      console.log(this.biography);
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(this.user)
+        .update({
+          Name: this.name,
+          Biography: this.biography,
+        });
+    },
+
+    toListing: function() {
+      this.$router.push({ path: `/newListing`, name: "newListing" });
+    },
+  },
+};
+</script>
+
+<style scoped>
+#mx-auto {
+  position: absolute;
+  top: 50px;
+}
+</style>
