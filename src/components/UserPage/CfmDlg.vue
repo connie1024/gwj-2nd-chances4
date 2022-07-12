@@ -28,4 +28,22 @@
         >
         <v-btn
           color="orange"
-          
+          class="body-2 font-weight-bold"
+          outlined
+          @click.native="agree"
+          >OK</v-btn
+        >
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
+</template>
+
+<script>
+  export default {
+    name: "ConfirmDlg",
+    data() {
+      return {
+        dialog: false,
+        resolve: null,
+        reject: null,
+        message: null,
