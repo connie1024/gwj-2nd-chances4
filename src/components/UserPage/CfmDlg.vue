@@ -47,3 +47,19 @@
         resolve: null,
         reject: null,
         message: null,
+        title: null,
+        options: {
+          color: "orange",
+          width: 400,
+          zIndex: 200,
+          noconfirm: false,
+        },
+      };
+    },
+
+    methods: {
+      open(title, message, options) {
+        this.dialog = true;
+        this.title = title;
+        this.message = message;
+        this.o
