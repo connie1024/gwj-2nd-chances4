@@ -18,3 +18,16 @@
       ></v-card-text>
       <v-card-actions class="pt-3">
         <v-spacer></v-spacer>
+        <v-btn
+          v-if="!options.noconfirm"
+          color="orange"
+          text
+          class="body-2 font-weight-bold"
+          @click.native="cancel"
+          >Cancel</v-btn
+        >
+        <v-btn
+          color="orange"
+          class="body-2 font-weight-bold"
+          outlined
+       
