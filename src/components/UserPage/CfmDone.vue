@@ -7,4 +7,14 @@
   >
     <v-card>
       <v-toolbar dark :color="options.color" dense flat>
-        <v-toolbar-title class="t
+        <v-toolbar-title class="text-body-2 font-weight-bold white--text">
+          {{ title }}
+        </v-toolbar-title>
+      </v-toolbar>
+      <v-card-text
+        v-show="!!message"
+        class="pa-4 black--text"
+        v-html="message"
+      ></v-card-text>
+      <v-card-actions class="pt-3">
+        <v-spacer></v-spacer>
