@@ -73,4 +73,9 @@
         this.dialog = false;
       },
       cancel() {
-        this.resolve(fal
+        this.resolve(false);
+        this.dialog = false;
+      },
+    },
+  };
+</script>
