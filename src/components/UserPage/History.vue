@@ -146,3 +146,57 @@ export default {
         .firestore()
         .collection("Listings")
         .doc(x)
+        .update({
+          Type: "Completed",
+          CompletedDate: new Date(),
+        })
+        .then(() => location.reload());
+    },
+    async delRecord(x) {
+      if (
+        await this.$refs.confirm.open(
+          "Confirm Deletion",
+          "Are you sure you want to delete this listing permanently?"
+        )
+      ) {
+        this.deleteRecord(x);
+      }
+    },
+    deleteRecord(x) {
+      firebase
+        .firestore()
+        .collection("Listings")
+        .doc(x)
+        .delete()
+        .then(() => location.reload());
+    },
+    route: function(x) {
+      this.$router.push({ name: "edit", params: { doc_id: x } });
+    },
+  },
+  created() {
+    this.fetchItems();
+  },
+};
+</script>
+
+<style scoped>
+.hh {
+  background: rgb(255, 153, 0);
+  color: #fff;
+  font-weight: 700;
+  padding: 0.3em 0.6em;
+  border-radius: 0em;
+  display: flex;
+  font-size: 100%;
+  word-break: break-all;
+}
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.7;
+  position: absolute;
+  width: 100%;
+}
+</style>
