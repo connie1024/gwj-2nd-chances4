@@ -262,3 +262,137 @@ export default {
       this.listing["Location"] = this.loc;
       this.listing["Price"] = this.price;
       this.listing["UserID"] = localStorage.getItem("UID");
+      this.listing["images"] = this.imgurls;
+      if (x === "sale") {
+        var others = {};
+        others["Alternatives"] = this.alt_trade;
+
+        this.listing["sale"] = others;
+        // console.log(this.listing["sale"])
+      } else if (x === "rent") {
+        var others2 = {};
+        others2["Interval"] = this.interval;
+        others2["Terms and Conditions"] = this.tnc;
+        this.listing["rent"] = others2;
+      } else if (x === "wish") {
+        var others3 = {};
+        this.listing["wish"] = others3;
+      }
+      firebase
+        .firestore()
+        .collection("Listings")
+        .doc(doc_id)
+        .update(this.listing)
+        .then(() => {
+          this.$router.push("/profile");
+        });
+      // console.log("listingid"+y);
+    },
+    deleteImage: function(img) {
+      this.imgurls = this.imgurls.filter(function(value) {
+        return value != img;
+      });
+    },
+    fetchListing: function() {
+      let doc_id = this.$route.params.doc_id;
+      this.listingid = doc_id;
+      console.log("CALLED!" + doc_id);
+      firebase
+        .firestore()
+        .collection("Listings")
+        .doc(doc_id)
+        .get()
+        .then((doc) => {
+          let x = doc.data();
+          this.title = x["Title"];
+          this.desc = x["Description"];
+          this.selectedType = x["Type"];
+          this.selectedSubcat = x["Subcat"];
+          this.loc = x["Location"];
+          this.price = x["Price"];
+          this.img1 = x["images"][0];
+          this.imgurls = x["images"];
+          console.log(this.imgurls);
+          if (this.selectedType == "rent") {
+            this.interval = x["rent"]["Interval"];
+            this.tnc = x["rent"]["Terms and Conditions"];
+          } else if (this.selectedType == "sale") {
+            this.alt_trade = x["sale"]["Alternatives"];
+            this.trans_method = x["sale"]["Alternatives"]["Transaction method"];
+          }
+        });
+      console.log(this.listingid);
+    },
+    click1() {
+      this.$refs.input1.click();
+    },
+    previewImage(event) {
+      this.uploadValue = 0;
+      this.img1 = null;
+      this.imageData = event.target.files[0];
+      this.onUpload();
+    },
+    onUpload() {
+      this.img1 = null;
+      const storageRef = firebase
+        .storage()
+        .ref(`${this.imageData.name}`)
+        .put(this.imageData);
+      storageRef.on(
+        `state_changed`,
+        (snapshot) => {
+          this.uploadValue =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.log(error.message);
+        },
+        () => {
+          this.uploadValue = 100;
+          storageRef.snapshot.ref.getDownloadURL().then((url) => {
+            this.img1 = url;
+            this.imgurls.push(this.img1);
+            console.log(this.imgurls);
+          });
+        }
+      );
+      // console.log("ran")
+    },
+  },
+};
+</script>
+
+<style scoped>
+h1 {
+  font-size: 50px;
+  font-weight: 600;
+  text-align: center;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: #2c3e50;
+}
+h3 {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: #e09d20;
+  padding-top: 20px;
+}
+strong {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  color: #e09d20;
+  padding-top: 20px;
+}
+#additionalOptions,
+#commonOptions {
+  text-align: start;
+}
+textarea {
+  background-color: #fff8e1;
+}
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.7;
+  position: absolute;
+  width: 100%;
+}
+</style>
