@@ -74,4 +74,8 @@ export default {
     },
     cancel() {
       this.resolve(false);
-      
+      this.dialog = false;
+    },
+  },
+};
+</script>
