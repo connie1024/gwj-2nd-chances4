@@ -221,3 +221,113 @@ export default {
       this.user = localStorage.UID;
     }
     this.isSameUser = this.currentid === this.user;
+
+    firebase
+      .firestore()
+      .collection("users")
+      .where("id", "==", this.user)
+      .get()
+      .then((res) => {
+        const data = res.docs[0].data();
+        this.name = data.Name;
+        this.email = data.Email;
+        this.profile = data.ProfileURL;
+        this.profileData = data.ProfileURL;
+        this.background = data.BackgroundURL;
+        this.backgroundData = data.BackgroundURL;
+        this.rating = data.Rating;
+        this.biography = data.Biography;
+        this.rating = data.Rating;
+        this.numRatings = data.numRatings;
+      });
+  },
+  methods: {
+    updateUser: function() {
+      console.log(this.biography);
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(localStorage.UID)
+        .update({
+          Name: this.name,
+          Biography: this.biography,
+        });
+    },
+    clickProfile() {
+      this.$refs.input1.click();
+    },
+    clickBackground() {
+      this.$refs.background.click();
+    },
+    previewBackground(event) {
+      this.backgroundData = event.target.files[0];
+      this.onUploadBackground();
+    },
+    previewImage(event) {
+      this.profileData = event.target.files[0];
+      this.onUpload();
+    },
+    onUpload() {
+      const storageRef = firebase
+        .storage()
+        .ref(`${this.user}/profile` + `/${this.profileData.name}`)
+        .put(this.profileData);
+      storageRef.on(
+        `state_changed`,
+        (snapshot) => {
+          this.uploadValue =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.log(error.message);
+        },
+        () => {
+          this.uploadValue = 100;
+          storageRef.snapshot.ref.getDownloadURL().then((url) => {
+            this.profile = url;
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(localStorage.UID)
+              .update({ ProfileURL: this.profile });
+          });
+        }
+      );
+    },
+    onUploadBackground: function() {
+      const storageRef = firebase
+        .storage()
+        .ref(`${this.user}/background` + `/${this.backgroundData.name}`)
+        .put(this.backgroundData);
+      storageRef.on(
+        `state_changed`,
+        (snapshot) => {
+          this.uploadValue =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        },
+        (error) => {
+          console.log(error.message);
+        },
+        () => {
+          this.uploadValue = 100;
+          storageRef.snapshot.ref.getDownloadURL().then((url) => {
+            this.background = url;
+            firebase
+              .firestore()
+              .collection("users")
+              .doc(localStorage.UID)
+              .update({ BackgroundURL: this.background });
+          });
+        }
+      );
+    },
+  },
+};
+</script>
+
+<style scoped>
+#mx-auto {
+  position: absolute;
+  top: 50px;
+}
+</style>
