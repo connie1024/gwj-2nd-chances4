@@ -179,3 +179,80 @@ export default {
       review.disabledlikes = !review.disabledlikes;
     },
     getAvatar: function() {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(this.localUser)
+        .get()
+        .then((res) => {
+          this.userProfile = res.data().ProfileURL;
+        });
+    },
+    uploadReview: function() {
+      let newReview = {
+        date: new Date(),
+        reviewerId: this.localUser,
+        reviewerName: this.localUserName,
+        reviewContent: this.reviewContent,
+        reviewerProfile: this.userProfile,
+        likes: 0,
+        dislikes: 0,
+        rating: this.rating,
+      };
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(this.shopOwner)
+        .collection("Reviews")
+        .add(newReview)
+        .then(() => {
+          firebase
+            .firestore()
+            .collection("users")
+            .doc(this.shopOwner)
+            .update({
+              Rating: firebase.firestore.FieldValue.increment(this.rating),
+              numRatings: firebase.firestore.FieldValue.increment(1),
+            });
+          this.getAllReviews();
+        });
+    },
+    getAllReviews: function() {
+      this.allReviews = [];
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(this.shopOwner)
+        .collection("Reviews")
+        .orderBy("date", "desc")
+        .get()
+        .then((res) => {
+          res.forEach((doc) => {
+            let data = doc.data();
+            let review = {
+              date: data.date,
+              reviewId: doc.id,
+              reviewerId: data.reviewerId,
+              reviewContent: data.reviewContent,
+              reviewerProfile: data.reviewerProfile,
+              reviewerName: data.reviewerName,
+              rating: data.rating,
+              likes: data.likes,
+              dislikes: data.dislikes,
+              likedorDisliked: false,
+              disablelikes: false,
+              disabledislikes: false,
+            };
+            console.log(data);
+            this.allReviews.push(review);
+          });
+        });
+    },
+  },
+  created() {
+    this.getAvatar();
+    this.getAllReviews();
+  },
+};
+</script>
+<style scoped></style>
