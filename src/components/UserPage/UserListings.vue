@@ -226,3 +226,18 @@ export default {
   background: rgb(255, 153, 0);
   color: #fff;
   font-weight: 700;
+  padding: 0.3em 0.6em;
+  border-radius: 0em;
+  display: flex;
+  font-size: 100%;
+  word-break: break-all;
+}
+.v-card--reveal {
+  align-items: center;
+  bottom: 0;
+  justify-content: center;
+  opacity: 0.7;
+  position: absolute;
+  width: 100%;
+}
+</style>
