@@ -10,4 +10,12 @@
       :loading-rooms="loadingRooms"
       :messages="messages"
       :messages-loaded="messagesLoaded"
-      :rooms-loaded
+      :rooms-loaded="roomsLoaded"
+      :room-actions="roomActions"
+      :menu-actions="menuActions"
+      :room-message="roomMessage"
+      @fetch-more-rooms="fetchMoreRooms"
+      @fetch-messages="fetchMessages"
+      @send-message="sendMessage"
+      @edit-message="editMessage"
+      @delete
