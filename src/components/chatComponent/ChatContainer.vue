@@ -18,4 +18,11 @@
       @fetch-messages="fetchMessages"
       @send-message="sendMessage"
       @edit-message="editMessage"
-      @delete
+      @delete-message="deleteMessage"
+      @open-file="openFile"
+      @open-user-tag="openUserTag"
+      @room-action-handler="menuActionHandler"
+      @menu-action-handler="menuActionHandler"
+      @send-message-reaction="sendMessageReaction"
+      @typing-message="typingMessage"
+      @toggle-rooms-list="$emit('show-demo-options', $ev
