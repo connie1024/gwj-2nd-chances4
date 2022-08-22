@@ -25,4 +25,21 @@
       @menu-action-handler="menuActionHandler"
       @send-message-reaction="sendMessageReaction"
       @typing-message="typingMessage"
-      @toggle-rooms-list="$emit('show-demo-options', $ev
+      @toggle-rooms-list="$emit('show-demo-options', $event.opened)"
+    >
+    </chat-window>
+  </div>
+</template>
+
+<script>
+import {
+  firebase,
+  roomsRef,
+  messagesRef,
+  usersRef,
+  filesRef,
+  deleteDbField,
+  storage,
+} from "../../firebase";
+import { parseTimestamp, isSameDay } from "../../utils/dates";
+import ChatWindow from "vue-advanced-chat";
