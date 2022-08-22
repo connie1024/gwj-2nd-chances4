@@ -50,4 +50,20 @@ import "vue-advanced-chat/dist/vue-advanced-chat.css";
 // import ChatWindow from './../../dist/vue-advanced-chat.umd.min.js'
 
 export default {
-  co
+  components: {
+    ChatWindow,
+  },
+
+  props: ["currentUserId", "theme", "isDevice"],
+
+  data() {
+    return {
+      roomsPerPage: 15,
+      rooms: [],
+      roomId: "",
+      startRooms: null,
+      endRooms: null,
+      roomsLoaded: false,
+      loadingRooms: true,
+      allUsers: [],
+      loadingLast
