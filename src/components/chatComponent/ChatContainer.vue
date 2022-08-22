@@ -43,3 +43,11 @@ import {
 } from "../../firebase";
 import { parseTimestamp, isSameDay } from "../../utils/dates";
 import ChatWindow from "vue-advanced-chat";
+import "vue-advanced-chat/dist/vue-advanced-chat.css";
+// import ChatWindow, { Rooms } from 'vue-advanced-chat'
+// import ChatWindow from 'vue-advanced-chat'
+// import 'vue-advanced-chat/dist/vue-advanced-chat.css'
+// import ChatWindow from './../../dist/vue-advanced-chat.umd.min.js'
+
+export default {
+  co
