@@ -66,4 +66,15 @@ export default {
       roomsLoaded: false,
       loadingRooms: true,
       allUsers: [],
-      loadingLast
+      loadingLastMessageByRoom: 0,
+      roomsLoadedCount: false,
+      selectedRoom: null,
+      messagesPerPage: 20,
+      messages: [],
+      messagesLoaded: false,
+      roomMessage: "",
+      startMessages: null,
+      endMessages: null,
+      roomsListeners: [],
+      listeners: [],
+      typingMessa
