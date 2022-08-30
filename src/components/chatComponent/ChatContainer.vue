@@ -88,4 +88,13 @@ export default {
       removeUsers: [],
       roomActions: [
         { name: "inviteUser", title: "Invite User" },
-        { name: "removeUser", title: "Remove
+        { name: "removeUser", title: "Remove User" },
+        { name: "deleteRoom", title: "Delete Room" },
+      ],
+      menuActions: [
+        { name: "inviteUser", title: "Invite User" },
+        { name: "removeUser", title: "Remove User" },
+        { name: "deleteRoom", title: "Delete Room" },
+      ],
+      styles: { container: { borderRadius: "4px" } },
+      // ,db
