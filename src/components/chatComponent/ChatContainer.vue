@@ -77,4 +77,15 @@ export default {
       endMessages: null,
       roomsListeners: [],
       listeners: [],
-      typingMessa
+      typingMessageCache: "",
+      disableForm: false,
+      addNewRoom: null,
+      addRoomUsername: "",
+      inviteRoomId: null,
+      invitedUsername: "",
+      removeRoomId: null,
+      removeUserId: "",
+      removeUsers: [],
+      roomActions: [
+        { name: "inviteUser", title: "Invite User" },
+        { name: "removeUser", title: "Remove
