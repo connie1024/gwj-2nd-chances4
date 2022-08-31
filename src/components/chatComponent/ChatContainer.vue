@@ -97,4 +97,22 @@ export default {
         { name: "deleteRoom", title: "Delete Room" },
       ],
       styles: { container: { borderRadius: "4px" } },
-      // ,db
+      // ,dbRequestCount: 0
+    };
+  },
+
+  mounted() {
+    this.fetchRooms();
+    this.updateUserOnlineStatus();
+  },
+
+  destroyed() {
+    this.resetRooms();
+  },
+
+  computed: {
+    loadedRooms() {
+      return this.rooms.slice(0, this.roomsLoadedCount);
+    },
+    screenHeight() {
+      return this.isDevice ? win
