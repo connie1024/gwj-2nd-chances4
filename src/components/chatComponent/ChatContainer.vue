@@ -115,4 +115,15 @@ export default {
       return this.rooms.slice(0, this.roomsLoadedCount);
     },
     screenHeight() {
-      return this.isDevice ? win
+      return this.isDevice ? window.innerHeight + "px" : "calc(100vh - 80px)";
+    },
+  },
+
+  methods: {
+    resetRooms() {
+      this.loadingRooms = true;
+      this.loadingLastMessageByRoom = 0;
+      this.roomsLoadedCount = 0;
+      this.rooms = [];
+      this.roomsLoaded = true;
+      this.startRooms = null;
