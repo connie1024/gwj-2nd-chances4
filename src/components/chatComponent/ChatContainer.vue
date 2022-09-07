@@ -127,3 +127,14 @@ export default {
       this.rooms = [];
       this.roomsLoaded = true;
       this.startRooms = null;
+      this.endRooms = null;
+      this.roomsListeners.forEach((listener) => listener());
+      this.roomsListeners = [];
+      this.resetMessages();
+    },
+
+    resetMessages() {
+      this.messages = [];
+      this.messagesLoaded = false;
+      this.startMessages = null;
+      this.endMessages = null
