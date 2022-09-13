@@ -137,4 +137,17 @@ export default {
       this.messages = [];
       this.messagesLoaded = false;
       this.startMessages = null;
-      this.endMessages = null
+      this.endMessages = null;
+      this.listeners.forEach((listener) => listener());
+      this.listeners = [];
+    },
+
+    fetchRooms() {
+      this.resetRooms();
+      this.fetchMoreRooms();
+    },
+
+    async fetchMoreRooms() {
+      if (this.endRooms && !this.startRooms) return (this.roomsLoaded = true);
+      let query = roomsRef
+        
