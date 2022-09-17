@@ -150,4 +150,11 @@ export default {
     async fetchMoreRooms() {
       if (this.endRooms && !this.startRooms) return (this.roomsLoaded = true);
       let query = roomsRef
-        
+        .where("users", "array-contains", this.currentUserId)
+        .orderBy("lastUpdated", "desc")
+        .limit(this.roomsPerPage);
+
+      if (this.startRooms) query = query.startAfter(this.startRooms);
+
+      const rooms = await query.get();
+      // this.incrementDbCounter('Fetch Rooms', 
