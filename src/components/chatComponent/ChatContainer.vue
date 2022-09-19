@@ -157,4 +157,13 @@ export default {
       if (this.startRooms) query = query.startAfter(this.startRooms);
 
       const rooms = await query.get();
-      // this.incrementDbCounter('Fetch Rooms', 
+      // this.incrementDbCounter('Fetch Rooms', rooms.size)
+
+      this.roomsLoaded = rooms.empty || rooms.size < this.roomsPerPage;
+
+      if (this.startRooms) this.endRooms = this.startRooms;
+      this.startRooms = rooms.docs[rooms.docs.length - 1];
+
+      const roomUserIds = [];
+      rooms.forEach((room) => {
+        r
