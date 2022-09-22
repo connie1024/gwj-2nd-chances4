@@ -166,4 +166,12 @@ export default {
 
       const roomUserIds = [];
       rooms.forEach((room) => {
-        r
+        room.data().users.forEach((userId) => {
+          const foundUser = this.allUsers.find((user) => user.id === userId);
+          if (!foundUser && roomUserIds.indexOf(userId) === -1) {
+            roomUserIds.push(userId);
+          }
+        });
+      });
+
+      // this.incrementDbCo
