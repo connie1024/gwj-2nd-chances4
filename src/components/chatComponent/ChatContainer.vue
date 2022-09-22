@@ -174,4 +174,15 @@ export default {
         });
       });
 
-      // this.incrementDbCo
+      // this.incrementDbCounter('Fetch Room Users', roomUserIds.length)
+      const rawUsers = [];
+      roomUserIds.forEach((userId) => {
+        const promise = usersRef
+          .doc(userId)
+          .get()
+          .then((user) => user.data());
+
+        rawUsers.push(promise);
+      });
+
+      this.al
