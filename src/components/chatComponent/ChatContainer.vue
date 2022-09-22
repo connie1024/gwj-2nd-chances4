@@ -185,4 +185,10 @@ export default {
         rawUsers.push(promise);
       });
 
-      this.al
+      this.allUsers = [...this.allUsers, ...(await Promise.all(rawUsers))];
+
+      const roomList = {};
+      rooms.forEach((room) => {
+        roomList[room.id] = { ...room.data(), users: [] };
+        room.data().users.forEach((userId) => {
+          const foundUser = this.allUsers.find((user) =
