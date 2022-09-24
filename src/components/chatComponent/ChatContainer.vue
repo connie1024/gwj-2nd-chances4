@@ -191,4 +191,15 @@ export default {
       rooms.forEach((room) => {
         roomList[room.id] = { ...room.data(), users: [] };
         room.data().users.forEach((userId) => {
-          const foundUser = this.allUsers.find((user) =
+          const foundUser = this.allUsers.find((user) => user.id === userId);
+          if (foundUser) roomList[room.id].users.push(foundUser);
+        });
+      });
+
+      const formattedRooms = [];
+
+      Object.keys(roomList).forEach((key) => {
+        const room = roomList[key];
+
+        const roomContacts = room.users.filter(
+          (user) => user.id !== thi
