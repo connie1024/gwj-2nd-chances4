@@ -210,4 +210,15 @@ export default {
 
         const roomAvatar =
           roomContacts.length === 1 && roomContacts[0].ProfileURL
-            ? roomCont
+            ? roomContacts[0].ProfileURL
+            : require("@/assets/defaultUser.jpg");
+
+        formattedRooms.push({
+          ...room,
+          roomId: key,
+          avatar: roomAvatar,
+          index: room.lastUpdated.seconds,
+          lastMessage: {
+            content: "Room created",
+            timestamp: this.formatTimestamp(
+         
