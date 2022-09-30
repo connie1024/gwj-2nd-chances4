@@ -202,4 +202,12 @@ export default {
         const room = roomList[key];
 
         const roomContacts = room.users.filter(
-          (user) => user.id !== thi
+          (user) => user.id !== this.currentUserId
+        );
+        //console.log(roomContacts[0].ProfileURL);
+        room.roomName =
+          roomContacts.map((user) => user.username).join(", ") || "Myself";
+
+        const roomAvatar =
+          roomContacts.length === 1 && roomContacts[0].ProfileURL
+            ? roomCont
