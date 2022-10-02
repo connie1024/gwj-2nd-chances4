@@ -221,4 +221,16 @@ export default {
           lastMessage: {
             content: "Room created",
             timestamp: this.formatTimestamp(
-         
+              new Date(room.lastUpdated.seconds),
+              room.lastUpdated
+            ),
+          },
+        });
+      });
+
+      this.rooms = this.rooms.concat(formattedRooms);
+      formattedRooms.map((room) => this.listenLastMessage(room));
+
+      if (!this.rooms.length) {
+        this.loadingRooms = false;
+        thi
