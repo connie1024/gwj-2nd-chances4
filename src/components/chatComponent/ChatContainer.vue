@@ -233,4 +233,14 @@ export default {
 
       if (!this.rooms.length) {
         this.loadingRooms = false;
-        thi
+        this.roomsLoadedCount = 0;
+      }
+
+      this.listenUsersOnlineStatus(formattedRooms);
+      this.listenRooms(query);
+      // setTimeout(() => console.log('TOTAL', this.dbRequestCount), 2000)
+    },
+
+    listenLastMessage(room) {
+      const listener = messagesRef(room.roomId)
+        .orderBy("timestamp", "desc")
