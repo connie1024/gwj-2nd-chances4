@@ -244,3 +244,10 @@ export default {
     listenLastMessage(room) {
       const listener = messagesRef(room.roomId)
         .orderBy("timestamp", "desc")
+        .limit(1)
+        .onSnapshot((messages) => {
+          // this.incrementDbCounter('Listen Last Room Message', messages.size)
+          messages.forEach((message) => {
+            const lastMessage = this.formatLastMessage(message.data());
+            const roomIndex = this.rooms.findIndex(
+     
