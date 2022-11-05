@@ -250,4 +250,12 @@ export default {
           messages.forEach((message) => {
             const lastMessage = this.formatLastMessage(message.data());
             const roomIndex = this.rooms.findIndex(
-     
+              (r) => room.roomId === r.roomId
+            );
+            this.rooms[roomIndex].lastMessage = lastMessage;
+            this.rooms = [...this.rooms];
+          });
+          if (this.loadingLastMessageByRoom < this.rooms.length) {
+            this.loadingLastMessageByRoom++;
+
+            if (this
