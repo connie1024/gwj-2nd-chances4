@@ -269,4 +269,16 @@ export default {
     },
 
     formatLastMessage(message) {
-      if (!message.timestamp) retu
+      if (!message.timestamp) return;
+
+      let content = message.content;
+      if (message.file)
+        content = `${message.file.name}.${message.file.extension ||
+          message.file.type}`;
+
+      return {
+        ...message,
+        ...{
+          content,
+          timestamp: this.formatTimestamp(
+            new Date(message.timestamp.seconds
