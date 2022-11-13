@@ -258,4 +258,15 @@ export default {
           if (this.loadingLastMessageByRoom < this.rooms.length) {
             this.loadingLastMessageByRoom++;
 
-            if (this
+            if (this.loadingLastMessageByRoom === this.rooms.length) {
+              this.loadingRooms = false;
+              this.roomsLoadedCount = this.rooms.length;
+            }
+          }
+        });
+
+      this.roomsListeners.push(listener);
+    },
+
+    formatLastMessage(message) {
+      if (!message.timestamp) retu
