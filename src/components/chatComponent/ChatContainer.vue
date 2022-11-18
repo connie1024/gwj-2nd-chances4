@@ -290,4 +290,16 @@ export default {
             message.sender_id !== this.currentUserId &&
             (!message.seen || !message.seen[this.currentUserId]),
         },
+      };
+    },
+
+    formatTimestamp(date, timestamp) {
+      const timestampFormat = isSameDay(date, new Date())
+        ? "HH:mm"
+        : "DD/MM/YY";
+      const result = parseTimestamp(timestamp, timestampFormat);
+      return timestampFormat === "HH:mm" ? `Today, ${result}` : result;
+    },
+
+    fetchMessages({ room, options = {} }) {
   
