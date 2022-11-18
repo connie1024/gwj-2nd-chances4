@@ -281,4 +281,13 @@ export default {
         ...{
           content,
           timestamp: this.formatTimestamp(
-            new Date(message.timestamp.seconds
+            new Date(message.timestamp.seconds * 1000),
+            message.timestamp
+          ),
+          distributed: true,
+          seen: message.sender_id === this.currentUserId ? message.seen : null,
+          new:
+            message.sender_id !== this.currentUserId &&
+            (!message.seen || !message.seen[this.currentUserId]),
+        },
+  
