@@ -302,4 +302,15 @@ export default {
     },
 
     fetchMessages({ room, options = {} }) {
-  
+      this.$emit("show-demo-options", false);
+
+      if (options.reset) this.resetMessages();
+
+      if (this.endMessages && !this.startMessages)
+        return (this.messagesLoaded = true);
+
+      let ref = messagesRef(room.roomId);
+
+      let query = ref.orderBy("timestamp", "desc").limit(this.messagesPerPage);
+
+    
