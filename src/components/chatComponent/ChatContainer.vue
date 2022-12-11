@@ -338,4 +338,15 @@ export default {
         messages.forEach((message) => {
           const formattedMessage = this.formatMessage(room, message);
           this.messages.unshift(formattedMessage);
- 
+        });
+
+        const listener = listenerQuery.onSnapshot((snapshots) => {
+          // this.incrementDbCounter('Listen Room Messages', snapshots.size)
+          this.listenMessages(snapshots, room);
+        });
+        this.listeners.push(listener);
+      });
+    },
+
+    listenMessages(messages, room) {
+    
