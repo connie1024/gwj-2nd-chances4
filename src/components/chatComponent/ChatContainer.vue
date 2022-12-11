@@ -313,4 +313,12 @@ export default {
 
       let query = ref.orderBy("timestamp", "desc").limit(this.messagesPerPage);
 
-    
+      if (this.startMessages) query = query.startAfter(this.startMessages);
+
+      this.selectedRoom = room.roomId;
+
+      query.get().then((messages) => {
+        // this.incrementDbCounter('Fetch Room Messages', messages.size)
+        if (this.selectedRoom !== room.roomId) return;
+
+        if (messages.empty) this.
