@@ -329,4 +329,13 @@ export default {
         let listenerQuery = ref.orderBy("timestamp");
 
         if (this.startMessages)
-          listenerQuery = listenerQuery.startAfter(thi
+          listenerQuery = listenerQuery.startAfter(this.startMessages);
+        if (this.endMessages)
+          listenerQuery = listenerQuery.endAt(this.endMessages);
+
+        if (options.reset) this.messages = [];
+
+        messages.forEach((message) => {
+          const formattedMessage = this.formatMessage(room, message);
+          this.messages.unshift(formattedMessage);
+ 
