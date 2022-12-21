@@ -349,4 +349,11 @@ export default {
     },
 
     listenMessages(messages, room) {
-    
+      messages.forEach((message) => {
+        const formattedMessage = this.formatMessage(room, message);
+        const messageIndex = this.messages.findIndex(
+          (m) => m._id === message.id
+        );
+
+        if (messageIndex === -1) {
+          this.messages = this.messages.concat([formattedMes
