@@ -368,4 +368,15 @@ export default {
     markMessagesSeen(room, message) {
       if (
         message.data().sender_id !== this.currentUserId &&
-        (!message.data().seen || 
+        (!message.data().seen || !message.data().seen[this.currentUserId])
+      ) {
+        messagesRef(room.roomId)
+          .doc(message.id)
+          .update({
+            [`seen.${this.currentUserId}`]: new Date(),
+          });
+      }
+    },
+
+    formatMessage(room, message) {
+      const senderUser = room.u
