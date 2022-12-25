@@ -356,4 +356,16 @@ export default {
         );
 
         if (messageIndex === -1) {
-          this.messages = this.messages.concat([formattedMes
+          this.messages = this.messages.concat([formattedMessage]);
+        } else {
+          this.$set(this.messages, messageIndex, formattedMessage);
+        }
+
+        this.markMessagesSeen(room, message);
+      });
+    },
+
+    markMessagesSeen(room, message) {
+      if (
+        message.data().sender_id !== this.currentUserId &&
+        (!message.data().seen || 
