@@ -379,4 +379,16 @@ export default {
     },
 
     formatMessage(room, message) {
-      const senderUser = room.u
+      const senderUser = room.users.find(
+        (user) => message.data().sender_id === user.id
+      );
+
+      const { sender_id, timestamp } = message.data();
+
+      return {
+        ...message.data(),
+        ...{
+          senderId: sender_id,
+          _id: message.id,
+          seconds: timestamp.seconds,
+          timestamp
