@@ -391,4 +391,13 @@ export default {
           senderId: sender_id,
           _id: message.id,
           seconds: timestamp.seconds,
-          timestamp
+          timestamp: parseTimestamp(timestamp, "HH:mm"),
+          date: parseTimestamp(timestamp, "DD MMMM YYYY"),
+          username: senderUser ? senderUser.username : null,
+          // avatar: senderUser ? senderUser.avatar : null,
+          distributed: true,
+        },
+      };
+    },
+
+    async sendMessage({ content, roomId, file, re
