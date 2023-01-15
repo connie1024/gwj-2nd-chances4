@@ -400,4 +400,16 @@ export default {
       };
     },
 
-    async sendMessage({ content, roomId, file, re
+    async sendMessage({ content, roomId, file, replyMessage }) {
+      const message = {
+        sender_id: this.currentUserId,
+        content,
+        timestamp: new Date(),
+      };
+
+      if (file) {
+        message.file = {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          extension: file.extension || file.t
