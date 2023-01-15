@@ -424,4 +424,15 @@ export default {
       if (replyMessage) {
         message.replyMessage = {
           _id: replyMessage._id,
-          content: re
+          content: replyMessage.content,
+          sender_id: replyMessage.senderId,
+        };
+
+        if (replyMessage.file) {
+          message.replyMessage.file = replyMessage.file;
+        }
+      }
+
+      const { id } = await messagesRef(roomId).add(message);
+      console.log("sending");
+      if (file) this.uploadFile({ file, message
