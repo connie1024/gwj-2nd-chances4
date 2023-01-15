@@ -412,4 +412,16 @@ export default {
           name: file.name,
           size: file.size,
           type: file.type,
-          extension: file.extension || file.t
+          extension: file.extension || file.type,
+          url: file.localUrl,
+        };
+        if (file.audio) {
+          message.file.audio = true;
+          message.file.duration = file.duration;
+        }
+      }
+
+      if (replyMessage) {
+        message.replyMessage = {
+          _id: replyMessage._id,
+          content: re
