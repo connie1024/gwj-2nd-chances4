@@ -435,4 +435,17 @@ export default {
 
       const { id } = await messagesRef(roomId).add(message);
       console.log("sending");
-      if (file) this.uploadFile({ file, message
+      if (file) this.uploadFile({ file, messageId: id, roomId });
+      console.log("send finish");
+      roomsRef.doc(roomId).update({ lastUpdated: new Date() });
+    },
+
+    openFile({ message }) {
+      window.open(message.file.url, "_blank");
+    },
+
+    async openUserTag({ user }) {
+      let roomId;
+
+      this.rooms.forEach((room) => {
+        if (room
