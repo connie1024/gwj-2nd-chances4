@@ -448,4 +448,13 @@ export default {
       let roomId;
 
       this.rooms.forEach((room) => {
-        if (room
+        if (room.users.length === 2) {
+          const userId1 = room.users[0].id;
+          const userId2 = room.users[1].id;
+          if (
+            (userId1 === user.id || userId1 === this.currentUserId) &&
+            (userId2 === user.id || userId2 === this.currentUserId)
+          ) {
+            roomId = room.roomId;
+          }
+     
