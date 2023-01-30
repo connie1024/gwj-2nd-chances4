@@ -457,4 +457,18 @@ export default {
           ) {
             roomId = room.roomId;
           }
-     
+        }
+      });
+
+      if (roomId) return (this.roomId = roomId);
+
+      const query1 = await roomsRef
+        .where("users", "==", [this.currentUserId, user.id])
+        .get();
+
+      if (!query1.empty) {
+        return this.loadRoom(query1);
+      }
+
+      let query2 = await roomsRef
+        .
