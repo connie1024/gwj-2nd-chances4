@@ -484,4 +484,16 @@ export default {
       });
 
       this.roomId = room.id;
-      thi
+      this.fetchRooms();
+    },
+
+    async loadRoom(query) {
+      query.forEach(async (room) => {
+        if (this.loadingRooms) return;
+        await roomsRef.doc(room.id).update({ lastUpdated: new Date() });
+        this.roomId = room.id;
+        this.fetchRooms();
+      });
+    },
+
+    async editMe
