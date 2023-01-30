@@ -471,4 +471,17 @@ export default {
       }
 
       let query2 = await roomsRef
-        .
+        .where("users", "==", [user.id, this.currentUserId])
+        .get();
+
+      if (!query2.empty) {
+        return this.loadRoom(query2);
+      }
+
+      const room = await roomsRef.add({
+        users: [user.id, this.currentUserId],
+        lastUpdated: new Date(),
+      });
+
+      this.roomId = room.id;
+      thi
