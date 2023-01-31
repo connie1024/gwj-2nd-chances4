@@ -496,4 +496,14 @@ export default {
       });
     },
 
-    async editMe
+    async editMessage({ messageId, newContent, roomId, file }) {
+      const newMessage = { edited: new Date() };
+      newMessage.content = newContent;
+
+      if (file) {
+        newMessage.file = {
+          name: file.name,
+          size: file.size,
+          type: file.type,
+          extension: file.extension || file.type,
+     
