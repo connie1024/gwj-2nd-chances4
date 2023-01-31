@@ -518,4 +518,17 @@ export default {
 
       await messagesRef(roomId)
         .doc(messageId)
-        .u
+        .update(newMessage);
+
+      if (file) this.uploadFile({ file, messageId, roomId });
+    },
+
+    async deleteMessage({ message, roomId }) {
+      await messagesRef(roomId)
+        .doc(message._id)
+        .update({ deleted: new Date() });
+
+      const { file } = message;
+
+      if (file) {
+        const del
