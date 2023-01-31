@@ -506,4 +506,16 @@ export default {
           size: file.size,
           type: file.type,
           extension: file.extension || file.type,
-     
+          url: file.url || file.localUrl,
+        };
+        if (file.audio) {
+          newMessage.file.audio = true;
+          newMessage.file.duration = file.duration;
+        }
+      } else {
+        newMessage.file = deleteDbField;
+      }
+
+      await messagesRef(roomId)
+        .doc(messageId)
+        .u
