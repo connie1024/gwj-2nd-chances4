@@ -531,4 +531,15 @@ export default {
       const { file } = message;
 
       if (file) {
-        const del
+        const deleteFileRef = filesRef
+          .child(this.currentUserId)
+          .child(message._id)
+          .child(`${file.name}.${file.extension || file.type}`);
+
+        await deleteFileRef.delete();
+      }
+    },
+
+    async uploadFile({ file, messageId, roomId }) {
+      let type = file.extension || file.type;
+      if (type === "sv
