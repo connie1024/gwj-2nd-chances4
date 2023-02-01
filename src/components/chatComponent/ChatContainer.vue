@@ -542,4 +542,16 @@ export default {
 
     async uploadFile({ file, messageId, roomId }) {
       let type = file.extension || file.type;
-      if (type === "sv
+      if (type === "svg" || type === "pdf") {
+        type = file.type;
+      }
+      console.log("upload");
+      const uploadFileRef = storage.ref(
+        "/chats" +
+          `/${this.currentUserId}` +
+          `/${messageId}` +
+          `${file.name}.${type}`
+      );
+
+      await uploadFileRef.put(file.blob, { contentType: type });
+     
