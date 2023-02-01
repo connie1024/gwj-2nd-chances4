@@ -554,4 +554,17 @@ export default {
       );
 
       await uploadFileRef.put(file.blob, { contentType: type });
-     
+      const url = await uploadFileRef.getDownloadURL();
+
+      await messagesRef(roomId)
+        .doc(messageId)
+        .update({
+          ["file.url"]: url,
+        });
+    },
+
+    menuActionHandler({ action, roomId }) {
+      switch (action.name) {
+        case "inviteUser":
+          return this.inviteUser(roomId);
+        c
