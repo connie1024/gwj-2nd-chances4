@@ -577,4 +577,16 @@ export default {
     async sendMessageReaction({ reaction, remove, messageId, roomId }) {
       const dbAction = remove
         ? firebase.firestore.FieldValue.arrayRemove(this.currentUserId)
-       
+        : firebase.firestore.FieldValue.arrayUnion(this.currentUserId);
+
+      await messagesRef(roomId)
+        .doc(messageId)
+        .update({
+          [`reactions.${reaction.name}`]: dbAction,
+        });
+    },
+
+    typingMessage({ message, roomId }) {
+      if (!roomId) return;
+
+      if (message?.length > 1)
