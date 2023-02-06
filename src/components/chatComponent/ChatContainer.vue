@@ -589,4 +589,15 @@ export default {
     typingMessage({ message, roomId }) {
       if (!roomId) return;
 
-      if (message?.length > 1)
+      if (message?.length > 1) {
+        return (this.typingMessageCache = message);
+      }
+
+      if (message?.length === 1 && this.typingMessageCache) {
+        return (this.typingMessageCache = message);
+      }
+
+      this.typingMessageCache = message;
+
+      const dbAction = message
+        ? firebase.firestore
