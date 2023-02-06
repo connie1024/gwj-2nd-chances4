@@ -567,4 +567,14 @@ export default {
       switch (action.name) {
         case "inviteUser":
           return this.inviteUser(roomId);
-        c
+        case "removeUser":
+          return this.removeUser(roomId);
+        case "deleteRoom":
+          return this.deleteRoom(roomId);
+      }
+    },
+
+    async sendMessageReaction({ reaction, remove, messageId, roomId }) {
+      const dbAction = remove
+        ? firebase.firestore.FieldValue.arrayRemove(this.currentUserId)
+       
