@@ -610,4 +610,13 @@ export default {
 
     async listenRooms(query) {
       const listener = query.onSnapshot((rooms) => {
-        // this.incrementDb
+        // this.incrementDbCounter('Listen Rooms Typing Users', rooms.size)
+        rooms.forEach((room) => {
+          const foundRoom = this.rooms.find((r) => r.roomId === room.id);
+          if (foundRoom) {
+            foundRoom.typingUsers = room.data().typingUsers;
+            foundRoom.index = room.data().lastUpdated.seconds;
+          }
+        });
+      });
+  
