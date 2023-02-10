@@ -600,4 +600,14 @@ export default {
       this.typingMessageCache = message;
 
       const dbAction = message
-        ? firebase.firestore
+        ? firebase.firestore.FieldValue.arrayUnion(this.currentUserId)
+        : firebase.firestore.FieldValue.arrayRemove(this.currentUserId);
+
+      roomsRef.doc(roomId).update({
+        typingUsers: dbAction,
+      });
+    },
+
+    async listenRooms(query) {
+      const listener = query.onSnapshot((rooms) => {
+        // this.incrementDb
