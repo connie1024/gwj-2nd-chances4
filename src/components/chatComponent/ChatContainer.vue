@@ -619,4 +619,15 @@ export default {
           }
         });
       });
-  
+      this.roomsListeners.push(listener);
+    },
+
+    updateUserOnlineStatus() {
+      const userStatusRef = firebase
+        .database()
+        .ref("/status/" + this.currentUserId);
+
+      const isOfflineData = {
+        state: "offline",
+        lastChanged: firebase.database.ServerValue.TIMESTAMP,
+      }
