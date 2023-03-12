@@ -630,4 +630,17 @@ export default {
       const isOfflineData = {
         state: "offline",
         lastChanged: firebase.database.ServerValue.TIMESTAMP,
-      }
+      };
+
+      const isOnlineData = {
+        state: "online",
+        lastChanged: firebase.database.ServerValue.TIMESTAMP,
+      };
+
+      firebase
+        .database()
+        .ref(".info/connected")
+        .on("value", (snapshot) => {
+          if (snapshot.val() == false) return;
+
+          user
