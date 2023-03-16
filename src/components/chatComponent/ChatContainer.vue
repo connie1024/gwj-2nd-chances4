@@ -643,4 +643,16 @@ export default {
         .on("value", (snapshot) => {
           if (snapshot.val() == false) return;
 
-          user
+          userStatusRef
+            .onDisconnect()
+            .set(isOfflineData)
+            .then(() => {
+              userStatusRef.set(isOnlineData);
+            });
+        });
+    },
+
+    listenUsersOnlineStatus(rooms) {
+      rooms.map((room) => {
+        room.users.map((user) => {
+          const listener = fir
