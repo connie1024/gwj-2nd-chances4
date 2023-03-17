@@ -674,4 +674,18 @@ export default {
 
               this.$set(this.rooms, roomIndex, room);
             });
-          this.room
+          this.roomsListeners.push(listener);
+        });
+      });
+    },
+
+    addRoom() {
+      this.resetForms();
+      this.addNewRoom = true;
+    },
+
+    async createRoom() {
+      this.disableForm = true;
+
+      const { id } = await usersRef.add({ username: this.addRoomUsername });
+      await usersRef.doc(id).u
