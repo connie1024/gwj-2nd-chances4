@@ -655,4 +655,12 @@ export default {
     listenUsersOnlineStatus(rooms) {
       rooms.map((room) => {
         room.users.map((user) => {
-          const listener = fir
+          const listener = firebase
+            .database()
+            .ref("/status/" + user.id)
+            .on("value", (snapshot) => {
+              if (!snapshot || !snapshot.val()) return;
+
+              const lastChanged = this.formatTimestamp(
+                new Date(snapshot.val().lastChanged),
+                new Date(snapshot.
