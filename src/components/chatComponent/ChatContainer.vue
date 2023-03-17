@@ -663,4 +663,15 @@ export default {
 
               const lastChanged = this.formatTimestamp(
                 new Date(snapshot.val().lastChanged),
-                new Date(snapshot.
+                new Date(snapshot.val().lastChanged)
+              );
+
+              user.status = { ...snapshot.val(), lastChanged };
+
+              const roomIndex = this.rooms.findIndex(
+                (r) => room.roomId === r.roomId
+              );
+
+              this.$set(this.rooms, roomIndex, room);
+            });
+          this.room
