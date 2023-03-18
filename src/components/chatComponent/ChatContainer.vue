@@ -713,3 +713,18 @@ export default {
       await roomsRef
         .doc(this.inviteRoomId)
         .update({ users: firebase.firestore.FieldValue.arrayUnion(id) });
+
+      this.inviteRoomId = null;
+      this.invitedUsername = "";
+      this.fetchRooms();
+    },
+
+    removeUser(roomId) {
+      this.resetForms();
+      this.removeRoomId = roomId;
+      this.removeUsers = this.rooms.find(
+        (room) => room.roomId === roomId
+      ).users;
+    },
+
+    as
