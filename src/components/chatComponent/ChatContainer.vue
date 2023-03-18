@@ -702,4 +702,14 @@ export default {
     inviteUser(roomId) {
       this.resetForms();
       this.inviteRoomId = roomId;
-   
+    },
+
+    async addRoomUser() {
+      this.disableForm = true;
+
+      const { id } = await usersRef.add({ username: this.invitedUsername });
+      await usersRef.doc(id).update({ id: id });
+
+      await roomsRef
+        .doc(this.inviteRoomId)
+        .update({ users: firebase.firestore.FieldValue.arrayUnion(id) });
