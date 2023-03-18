@@ -688,4 +688,18 @@ export default {
       this.disableForm = true;
 
       const { id } = await usersRef.add({ username: this.addRoomUsername });
-      await usersRef.doc(id).u
+      await usersRef.doc(id).update({ id: id });
+      await roomsRef.add({
+        users: [id, this.currentUserId],
+        lastUpdated: new Date(),
+      });
+
+      this.addNewRoom = false;
+      this.addRoomUsername = "";
+      this.fetchRooms();
+    },
+
+    inviteUser(roomId) {
+      this.resetForms();
+      this.inviteRoomId = roomId;
+   
