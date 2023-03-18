@@ -727,4 +727,16 @@ export default {
       ).users;
     },
 
-    as
+    async deleteRoomUser() {
+      this.disableForm = true;
+
+      await roomsRef.doc(this.removeRoomId).update({
+        users: firebase.firestore.FieldValue.arrayRemove(this.removeUserId),
+      });
+
+      this.removeRoomId = null;
+      this.removeUserId = "";
+      this.fetchRooms();
+    },
+
+    async delete
