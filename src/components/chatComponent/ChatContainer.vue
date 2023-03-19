@@ -745,4 +745,19 @@ export default {
         room.users.find((user) => user._id === "SGmFnBZB4xxMv9V4CVlW") ||
         room.users.find((user) => user._id === "6jMsIXUrBHBj7o2cRlau")
       ) {
-        return alert("Nope, for demo purposes you cannot delete this
+        return alert("Nope, for demo purposes you cannot delete this room");
+      }
+
+      const ref = messagesRef(roomId);
+
+      ref.get().then((res) => {
+        if (res.empty) return;
+        res.docs.map((doc) => ref.doc(doc.id).delete());
+      });
+
+      await roomsRef.doc(roomId).delete();
+
+      this.fetchRooms();
+    },
+
+    resetForms
