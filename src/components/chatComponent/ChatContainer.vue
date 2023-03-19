@@ -760,4 +760,15 @@ export default {
       this.fetchRooms();
     },
 
-    resetForms
+    resetForms() {
+      this.disableForm = false;
+      this.addNewRoom = null;
+      this.addRoomUsername = "";
+      this.inviteRoomId = null;
+      this.invitedUsername = "";
+      this.removeRoomId = null;
+      this.removeUserId = "";
+    },
+
+    // ,incrementDbCounter(type, size) {
+    // 	size = size || 1
