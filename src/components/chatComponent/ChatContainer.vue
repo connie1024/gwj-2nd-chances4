@@ -739,4 +739,10 @@ export default {
       this.fetchRooms();
     },
 
-    async delete
+    async deleteRoom(roomId) {
+      const room = this.rooms.find((r) => r.roomId === roomId);
+      if (
+        room.users.find((user) => user._id === "SGmFnBZB4xxMv9V4CVlW") ||
+        room.users.find((user) => user._id === "6jMsIXUrBHBj7o2cRlau")
+      ) {
+        return alert("Nope, for demo purposes you cannot delete this
