@@ -772,3 +772,26 @@ export default {
 
     // ,incrementDbCounter(type, size) {
     // 	size = size || 1
+    // 	this.dbRequestCount += size
+    // 	console.log(type, size)
+    // }
+  },
+};
+</script>
+
+<style scoped>
+.window-container {
+  width: 100%;
+}
+.window-mobile form {
+  padding: 0 10px 10px;
+}
+form {
+  padding-bottom: 20px;
+}
+input {
+  padding: 5px;
+  width: 140px;
+  height: 21px;
+  border-radius: 4px;
+  bo
