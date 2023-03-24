@@ -794,4 +794,20 @@ input {
   width: 140px;
   height: 21px;
   border-radius: 4px;
-  bo
+  border: 1px solid #d2d6da;
+  outline: none;
+  font-size: 14px;
+  vertical-align: middle;
+}
+input::placeholder {
+  color: #9ca6af;
+}
+button {
+  background: #1976d2;
+  color: #fff;
+  outline: none;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin-left: 10px;
+  border: 
