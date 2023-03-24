@@ -830,3 +830,12 @@ button:disabled {
   color: #a8aeb3;
   background: none;
   margin-left: 5px;
+}
+select {
+  vertical-align: middle;
+  height: 33px;
+  width: 152px;
+  font-size: 13px;
+  margin: 0 !important;
+}
+</style>
