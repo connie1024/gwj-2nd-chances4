@@ -810,4 +810,23 @@ button {
   border-radius: 4px;
   padding: 8px 12px;
   margin-left: 10px;
-  border: 
+  border: none;
+  font-size: 14px;
+  transition: 0.3s;
+  vertical-align: middle;
+}
+button:hover {
+  opacity: 0.8;
+}
+button:active {
+  opacity: 0.6;
+}
+button:disabled {
+  cursor: initial;
+  background: #c6c9cc;
+  opacity: 0.6;
+}
+.button-cancel {
+  color: #a8aeb3;
+  background: none;
+  margin-left: 5px;
