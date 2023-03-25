@@ -21,4 +21,17 @@ Vue.use(VueChatScroll);
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueTimeago, {
-  name: "Timeago", // Com
+  name: "Timeago", // Component name, `Timeago` by default
+  locale: "en", // Default locale
+  // We use `date-fns` under the hood
+  // So you can use all locales from it
+});
+Vue.config.productionTip = false;
+Vue.config.silent = true;
+
+export const router = new VueRouter({
+  routes: Routes,
+  mode: "history",
+});
+
+router.b
