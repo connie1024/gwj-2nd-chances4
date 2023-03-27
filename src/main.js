@@ -34,4 +34,16 @@ export const router = new VueRouter({
   mode: "history",
 });
 
-router.b
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  const isAuthtenticated = firebase.auth().currentUser;
+  if (requiresAuth && !isAuthtenticated) {
+    next("/login");
+  } else {
+    next();
+  }
+});
+
+let app;
+
+firebase.auth().onAuthStateChanged((user) => {
