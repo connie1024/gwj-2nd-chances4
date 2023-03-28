@@ -8,4 +8,9 @@ import Home from "./components/HomePage/Home.vue";
 import Chat from "./components/chatComponent/Chat.vue";
 import UserListings from "./components/UserPage/UserListings.vue";
 import Profile from "./components/UserPage/Profile.vue";
-import ItemPage from "./component
+import ItemPage from "./components/Items/ItemPage.vue";
+import Shopfront from "./components/Shop/Shopfront.vue";
+import EditListing from "./components/UserPage/EditListing.vue";
+import Search from "./components/HomePage/Search.vue";
+import Blank from "./components/HomePage/Blank.vue";
+import ItemPageRent from "./components/Items
