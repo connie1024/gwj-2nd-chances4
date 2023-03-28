@@ -59,4 +59,7 @@ firebase.auth().onAuthStateChanged((user) => {
       vuetify: new Vuetify(),
       icons: {
         iconfont: "mdiSvg",
-     
+      },
+    }).$mount("#app");
+  }
+});
