@@ -47,3 +47,16 @@ router.beforeEach((to, from, next) => {
 let app;
 
 firebase.auth().onAuthStateChanged((user) => {
+  if (user == null) {
+    localStorage.setItem("login", false);
+  } else {
+    localStorage.setItem("login", true);
+  }
+  if (!app) {
+    app = new Vue({
+      render: (h) => h(App),
+      router,
+      vuetify: new Vuetify(),
+      icons: {
+        iconfont: "mdiSvg",
+     
