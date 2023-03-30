@@ -13,4 +13,13 @@ import Shopfront from "./components/Shop/Shopfront.vue";
 import EditListing from "./components/UserPage/EditListing.vue";
 import Search from "./components/HomePage/Search.vue";
 import Blank from "./components/HomePage/Blank.vue";
-import ItemPageRent from "./components/Items
+import ItemPageRent from "./components/Items/ItemPageRent.vue";
+import ItemPageService from "./components/Items/ItemPageService.vue";
+import ItemPageCompleted from "./components/Items/ItemPageCompleted.vue";
+
+export default [
+  { path: "/", component: Home },
+  { path: "/login", component: Login },
+  { path: "/home", component: Home },
+  {
+    p
