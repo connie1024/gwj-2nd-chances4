@@ -48,3 +48,21 @@ export default [
     name: "chat",
     component: Chat,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: Profile,
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  {
+    path: "/ItemPage",
+    name: "itemPage",
+    component: ItemPage,
+    props: true,
+  },
+  {
+    path: "/ItemPageRent",
+    name: "itemPageRent",
+    component: Item
