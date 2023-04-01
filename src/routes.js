@@ -22,4 +22,16 @@ export default [
   { path: "/login", component: Login },
   { path: "/home", component: Home },
   {
-    p
+    path: "/newListing",
+    name: "newListing",
+    component: NewListing,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/myListings",
+    name: "myListings",
+    component: UserListings,
+    meta: { requiresAuth: true },
+  },
+  { path: "/Signup", name: "signUp", component: SignUp },
+  { path: "/sales", name: "sales
