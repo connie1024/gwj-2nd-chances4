@@ -34,4 +34,17 @@ export default [
     meta: { requiresAuth: true },
   },
   { path: "/Signup", name: "signUp", component: SignUp },
-  { path: "/sales", name: "sales
+  { path: "/sales", name: "sales", component: Sales },
+  { path: "/wish", name: "wish", component: Wish },
+  {
+    path: "/edit",
+    component: EditListing,
+    name: "edit",
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  {
+    path: "/chat",
+    name: "chat",
+    component: Chat,
+    meta: { requiresAuth: true },
