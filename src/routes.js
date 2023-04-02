@@ -82,4 +82,21 @@ export default [
   },
   {
     path: "/Shopfront",
-    name: "Shopf
+    name: "Shopfront",
+    component: Shopfront,
+    meta: { requiresAuth: true },
+    props: true,
+  },
+  {
+    path: "/search",
+    name: "search",
+    component: Search,
+    props: true,
+  },
+  {
+    path: "/blank",
+    name: "blank",
+    component: Blank,
+    props: true,
+  },
+];
