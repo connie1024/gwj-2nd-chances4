@@ -65,4 +65,21 @@ export default [
   {
     path: "/ItemPageRent",
     name: "itemPageRent",
-    component: Item
+    component: ItemPageRent,
+    props: true,
+  },
+  {
+    path: "/ItemPageCompleted",
+    name: "itemPageCompleted",
+    component: ItemPageCompleted,
+    props: true,
+  },
+  {
+    path: "/ItemPageService",
+    name: "itemPageService",
+    component: ItemPageService,
+    props: true,
+  },
+  {
+    path: "/Shopfront",
+    name: "Shopf
